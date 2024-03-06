@@ -40,12 +40,23 @@ class Creep():
         self.valeurArgent = 10 * self.parent.niveau
         self.dommageOverTime = []
         self.dommages = []
-
+        self.currentRoute = None
 
     def CreepCible(self):
-        self.cibleX = random.randrange(self.parent.largeur)
-        self.cibleY = random.randrange(self.parent.hauteur)
-        self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
+        if(self.currentRoute == None):
+            self.currentRoute = 0
+        else: self.currentRoute += 1
+
+        if(self.currentRoute < self.parent.routes.size()):
+            self.cibleX = random.randrange(self.parent.routes[self.currentRoute].PosX2, self.parent.routes[self.currentRoute].PosXZoneCible)
+            self.cibleY = random.randrange(self.parent.routes[self.currentRoute].PosY2, self.parent.routes[self.currentRoute].PosYZoneCible)
+            self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
+
+        else:
+            self.parent.vie -= 1
+            self.vie = 0
+
+
 
     def Mouvement(self):
         if self.cibleX:
@@ -56,6 +67,7 @@ class Creep():
 
             if dist <= self.vitesse:
                 self.CreepCible()
+
         else:
             self.CreepCible()
 
@@ -64,11 +76,12 @@ class Creep():
             self.vie = self.vie - dommage
             self.dommages.remove(dommage)
 
-        for dommageOver in self.dommageOverTime:
-            self.vie = self.vie - dommageOver[0][0]
-            dommageOver[0][1] -= 1
-            if(dommageOver[0][1]<=0):
-                self.dommageOverTime.remove(dommageOver[0])
+        for i in self.dommageOverTime:
+            for j in self.dommageOverTime:
+                self.vie = self.vie
+                dommageOver[0][1] -= 1
+                if(dommageOver[0][1]<=0):
+                    self.dommageOverTime.remove(dommageOver[0])
 
         if (self.vie <= 0):
             self.CreepMort()
@@ -78,8 +91,8 @@ class Creep():
         self.vivant = False
 
 
-    def finParcours(self):
-        pass
+
+
 
 
 
