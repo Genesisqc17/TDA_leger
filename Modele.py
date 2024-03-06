@@ -9,6 +9,7 @@ class Modele():
         self.argent = 0
         self.creepActif = []
         self.creepInactif = []
+        self.projActif = []
         self.tours = []
         self.routes = []
         self.positionsChateau = []
