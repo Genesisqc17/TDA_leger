@@ -13,6 +13,7 @@ class Modele():
         self.tours = []
         self.routes = []
         self.positionsChateau = []
+        self.nextIdTour = 0
         self.isVague = False
         self.creerRoutes()
         self.creerChateau()
