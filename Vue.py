@@ -4,7 +4,7 @@ from tkinter import *
 
 
 class Vue():
-    def __init__(self):
+    def __init__(self, parent, modele):
         self.canevas = None
         self.parent = parent
         self.modele = modele

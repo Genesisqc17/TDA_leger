@@ -1,18 +1,18 @@
 from helper import Helper as hp
 
 class Projectile:
-    def __init__(self, parent, PosX, PosY, CibleX, CibleY, niveauTour):
+    def __init__(self, parent, posX, posY, cibleX, cibleY, niveauTour):
         self.parent = parent
-        self.posX = PosX
-        self.posY = PosY
-        self.cibleX = CibleX
-        self.cibleY = CibleY
+        self.posX = posX
+        self.posY = posY
+        self.cibleX = cibleX
+        self.cibleY = cibleY
         self.niveauTour = niveauTour
         self.vitesse = 1
         self.dommage = None
-        self.rayon = 2
+        self.rayon = 8
         self.angle = None
-        self.entenduCollision = 1
+        self.etenduCollision = 1
 
     def calculDommageVitesse(self):
         if self.niveauTour == 1:
@@ -29,8 +29,8 @@ class Projectile:
         self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
 
     def checkCollision(self):
-        zone_collision = self.posX - self.rayon, self.posY - self.rayon, self.posX + self.rayon, self.posY + self.rayon
-        for creep in self.parent.creepActif[]:
+        zone_collision = (self.posX - self.rayon) - self.etenduCollision, (self.posY - self.rayon) - self.etenduCollision, (self.posX + self.rayon) + self.etenduCollision, (self.posY + self.rayon) + self.etenduCollision
+        for creep in self.parent.creepActif:
             zone_creep = (creep.CollisionX1,creep.CollisionY1,creep.CollisionX2,creep.CollisionY2)
 
             if not (zone_collision[2] < zone_creep[0] or

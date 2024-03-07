@@ -16,11 +16,11 @@ class Controleur():
 
     def boucle_jeu(self):
         self.vue.afficher_jeu()
-        if()
-            self.modele.fin_vague()
+        # if :
+        #    self.modele.fin_vague()
         self.vue.root.after(50, self.boucle_jeu)
 
 
-    if __name__ == "__main__":
-        c = Controleur()
+if (__name__ == "__main__"):
+    c = Controleur()
 

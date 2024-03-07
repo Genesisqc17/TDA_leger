@@ -5,5 +5,5 @@ class Route():
         self.posY1 = posY1
         self.posX2 = posX2
         self.posY2 = posY2
-        self.posXZoneCible = PosXZoneCible
-        self.posYZoneCible = PosYZoneCible
+        self.posXZoneCible = PosXZoneCible1
+        self.posYZoneCible = PosYZoneCible1
