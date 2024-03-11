@@ -1,5 +1,7 @@
 class Route():
-    def __init__(self, parent, posX posY):
+    def __init__(self, parent, posX, posY, posX2, posY2):
         self.parent = parent
-        self.posX = posX
-        self.posY = posY
+        self.posX = posX * self.parent.variableTaille
+        self.posY = posY * self.parent.variableTaille
+        self.posX2 = posX2 * self.parent.variableTaille
+        self.posY2 = posY2 * self.parent.variableTaille
