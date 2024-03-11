@@ -176,7 +176,7 @@ class Vue():
     def checkOverlap(self, event):
         overlaps = self.find_overlapping(self.canevasGame, event.x - self.modele.variableTaille, event.y - self.modele.variableTaille, event.x + self.modele.variableTaille, event.y + self.modele.variableTaille)
         for i in overlaps:
-            if i.gettag() != "tour" or i.gettag() != "route":
+            if i.gettag() != "tour" and i.gettag() != "route":
                 self.parent.creer_tour(self.typeTour,event.x, event.y)
 
     def acheter_tour(self):
