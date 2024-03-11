@@ -49,7 +49,7 @@ class Modele():
     def mouvement_jeu(self):
         self.timeFin = time.time()
         self.timeTotal = self.timeFin - self.timeDebut
-        if self.timeTotal % 2 == 0 and len(self.creepInactif) != 0:
+        if int(self.timeTotal) % 2 == 0 and len(self.creepInactif) != 0:
             self.creepActif.append(self.creepInactif[-1])
             self.creepInactif = self.creepInactif[:-1]
         ##Mouvement de tout les objets
