@@ -1,5 +1,5 @@
 import math
-
+from Projectile import Projectile
 
 class Tour():
     def __init__(self, parent, posX, posY, type, id):
@@ -11,7 +11,7 @@ class Tour():
         self.cibleX = None
         self.cibleY = None
         self.niveauForce = 1
-        self.rayon = None
+        self.rayon = self.parent.variableTaille
         self.cout = None
         self.etendu = None
         self.couleur = None
@@ -36,13 +36,12 @@ class Tour():
 
     def tirer(self):
         self.trouverCible()
-        if self.type == "tProjectile" and self.parent.temps % self.frequenceTirs == 0:
-           ## self.parent.projActif.append(Projectile)
-            pass
-        elif self.type == "tEclair" and self.parent.temps % self.frequenceTirs == 0:
+        if self.type == "tProjectile" and self.parent.timeTotal % self.frequenceTirs == 0:
+           self.parent.projActif.append(Projectile)
+        elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
             ## self.parent.projActif.append(Eclair)
             pass
-        elif self.type == "tPoison" and self.parent.temps % self.frequenceTirs == 0:
+        elif self.type == "tPoison" and self.parent.timeTotal % self.frequenceTirs == 0:
             ## self.parent.projActif.append(Poison)
             pass
 
