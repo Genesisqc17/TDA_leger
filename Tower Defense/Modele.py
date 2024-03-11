@@ -42,21 +42,25 @@ class Modele():
         self.niveauVague += 1
         self.initCreepInactif()
         for i in self.creepInactif:
-            self.creepActif.append(i)
-
-        self.creepInactif.clear()
-        for i in self.creepActif:
             i.CreepCible()
+
         self.isVague = True
         self.timeFin = time.time()
         self.timeFin = time.time()
 
     def mouvement_jeu(self):
-        for i in self.creepActif:
-            i.Mouvement()
         self.timeFin = time.time()
         self.timeTotal = self.timeFin - self.timeDebut
-
+        if self.timeTotal % 2 == 0 and len(self.creepInactif) is not 0:
+            self.creepActif.append(self.creepInactif[-1])
+            self.creepInactif = self.creepInactif[:-1]
+        ##Mouvement de tout les objets
+        for i in self.creepActif:
+            i.Mouvement()
+            
+        ##verif valeur dmg
+        for i in self.creepActif:
+            i.CreepVie()
     def fin_vague(self):
         self.projActif.clear()
         self.argent = self.argent + self.niveauVague * 50
