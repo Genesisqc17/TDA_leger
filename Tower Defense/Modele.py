@@ -38,6 +38,10 @@ class Modele():
             i.CreepCible()
         self.isVague = True
 
+    def mouvement_jeu(self):
+        for i in self.creepActif:
+            i.Mouvement()
+
     def initialiser_jeu(self):
         pass
 
