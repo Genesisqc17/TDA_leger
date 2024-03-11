@@ -1,4 +1,4 @@
-import Route
+from Route import Route
 
 class Modele():
     def __init__(self, parent):
