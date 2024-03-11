@@ -182,7 +182,7 @@ class Vue():
             self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
                                          fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
 
-
+'''
     def update_text(self):
         self.niv_wave_text.set("Vague: " + self.modele.niv_wave)
         self.chrono_text.set("Chrono: " + self.modele.chrono)
@@ -195,3 +195,4 @@ class Vue():
         self.force_tour_text.set("Force: " + self.modele.force_tour)
         self.etendu_tour_text.set("Étendu: " + self.modele.etendu_tour)
         self.force_tour_text.set("Force: " + self.modele.force_tour)
+        '''
