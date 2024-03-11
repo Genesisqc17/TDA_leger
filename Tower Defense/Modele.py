@@ -19,6 +19,7 @@ class Modele():
         self.creerChateau()
 
     def creerRoutes(self):
+
         pass
 
     def creerChateau(self):

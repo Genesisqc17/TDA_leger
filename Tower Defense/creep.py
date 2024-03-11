@@ -1,24 +1,4 @@
-import numpy as np
 import random
-from helper import Helper as hp
-class Modele():
-    def __init__(self, parent):
-        self.parent = parent
-        self.tailleX = 320 ##32 colonnes x10 en pixel
-        self.tailleY = 240
-        self.box_tailleX = self.tailleX
-        self.box_tailleY = self.tailleY/3
-        self.vie = 20
-        self.argent = 0
-        self.creepActif = []
-        self.creepInactif = []
-        self.projActif = []
-        self.tours = []
-        self.routes = []
-        self.positionsChateau = []
-        self.isVague = False
-        self.creerRoutes()
-        self.creerChateau()
 
 class Creep():
     def __init__(self, parent, posX, posY):
