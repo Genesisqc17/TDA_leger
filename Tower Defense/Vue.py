@@ -103,11 +103,11 @@ class Vue():
                            , font=self.police_label)
         self.timer.pack()
         self.niv_vague.pack()
-        self.vc_frame.pack()
+        self.vc_frame.pack(side=LEFT)
 
         # Frame pour acheter une tour
         self.tour_frame = Frame(self.menu_frame)
-        self.tour_frame.pack()
+        self.tour_frame.pack(side=LEFT)
 
         # Boutons pour acheter tours
         self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour
@@ -116,9 +116,9 @@ class Vue():
                                     , font=self.police_bouton)
         self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour
                                     , font=self.police_bouton)
-        self.poison_bouton.pack()
-        self.eclair_bouton.pack()
-        self.proj_bouton.pack()
+        self.poison_bouton.pack(side=LEFT)
+        self.eclair_bouton.pack(side=LEFT)
+        self.proj_bouton.pack(side=LEFT)
 
         # Frame pour la vie et l'argent
         self.va_frame = Frame(self.menu_frame)
@@ -128,7 +128,7 @@ class Vue():
                                 , font=self.police_label)
         self.cmp_argent.pack()
         self.cmp_nb_vies.pack()
-        self.va_frame.pack()
+        self.va_frame.pack(side=LEFT)
 
         return self.parent_frame
 
@@ -181,3 +181,17 @@ class Vue():
         for i in self.modele.routes:
             self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
                                          fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
+
+
+    def update_text(self):
+        self.niv_wave_text.set("Vague: " + self.modele.niv_wave)
+        self.chrono_text.set("Chrono: " + self.modele.chrono)
+        self.nb_vies.set("Vie: " + self.modele.vie)
+        self.qte_argent.set("Argent: " + self.modele.argent)
+        self.cout_upgrade_text.set("Coût: " + self.modele.cost_tour)
+        self.force_upgrade_text.set("Force: " + self.modele.force_upgrade)
+        self.etendu_upgrade_text.set("Étendu: " + self.modele.etendu_upgrade)
+        self.nom_tour_text.set("Tour: " + self.modele.type_tour)
+        self.force_tour_text.set("Force: " + self.modele.force_tour)
+        self.etendu_tour_text.set("Étendu: " + self.modele.etendu_tour)
+        self.force_tour_text.set("Force: " + self.modele.force_tour)
