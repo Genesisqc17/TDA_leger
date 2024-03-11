@@ -1,5 +1,7 @@
 from Route import Route
 from creep import Creep
+from Tour import Tour
+import time
 
 class Modele():
     def __init__(self, parent):
@@ -27,20 +29,37 @@ class Modele():
         self.creerRoutes()
         self.creerChateau()
         self.initCreepInactif()
+        self.timeDebut = 0
+        self.timeFin = 0
+        self.timeTotal = 0
+
+    def ajouter_tour(self, posX, posY, type):
+        self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
+        self.nextIdTour += 1
 
     def debut_vague(self):
         self.niveauVague += 1
+        self.initCreepInactif()
         for i in self.creepInactif:
-            self.creepActif.append(i)
-
-        self.creepInactif.clear()
-        for i in self.creepActif:
             i.CreepCible()
+
         self.isVague = True
+        self.timeFin = time.time()
+        self.timeFin = time.time()
 
     def mouvement_jeu(self):
+        self.timeFin = time.time()
+        self.timeTotal = self.timeFin - self.timeDebut
+        if self.timeTotal % 2 == 0 and len(self.creepInactif) != 0:
+            self.creepActif.append(self.creepInactif[-1])
+            self.creepInactif = self.creepInactif[:-1]
+        ##Mouvement de tout les objets
         for i in self.creepActif:
             i.Mouvement()
+
+        ##verif valeur dmg
+        for i in self.creepActif:
+            i.CreepVie()
 
     def initialiser_jeu(self):
         pass

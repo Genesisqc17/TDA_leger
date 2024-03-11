@@ -10,6 +10,9 @@ class Controleur():
     def initialiser_jeu(self):
         self.vue.root.after(10000, self.boucle_jeu())
 
+    def creer_tour(self,type, posX, posY):
+        self.modele.ajouter_tour(posX,posY,type)
+
 
     def boucle_jeu(self):
         self.vue.afficher_all()
@@ -18,7 +21,6 @@ class Controleur():
             self.modele.debut_vague()
         if self.modele.isVague:
             self.modele.mouvement_jeu()
-            print("sort")
         #if not:
         #    self.modele.fin_vague()
         self.vue.root.after(50, self.boucle_jeu)

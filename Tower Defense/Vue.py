@@ -37,6 +37,7 @@ class Vue():
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
         self.police_bouton = tkinter.font.Font(family="Terminal", size=12, weight="normal")
 
+        self.typeTour = None
         self.mes_frames = {"intro": self.creer_intro_frame(),
                            "parent": self.creer_parent_frame(),
                            "gameover": self.creer_game_over()}
@@ -110,11 +111,11 @@ class Vue():
         self.tour_frame.pack(side=LEFT)
 
         # Boutons pour acheter tours
-        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour
+        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour_proj
                                   , font=self.police_bouton)
-        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour
+        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour_eclair
                                     , font=self.police_bouton)
-        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour
+        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour_poison
                                     , font=self.police_bouton)
         self.poison_bouton.pack(side=LEFT)
         self.eclair_bouton.pack(side=LEFT)
@@ -160,8 +161,27 @@ class Vue():
 
         return self.upgrade_frame
 
+    def acheter_tour_proj(self):
+        self.acheter_tour()
+        self.typeTour = "tProjectile"
+
+    def acheter_tour_eclair(self):
+        self.acheter_tour()
+        self.typeTour = "tEclair"
+
+    def acheter_tour_poison(self):
+        self.acheter_tour()
+        self.typeTour = "tPoison"
+
+    def checkOverlap(self, event):
+        overlaps = self.find_overlapping(self.canevasGame, event.x - self.modele.variableTaille, event.y - self.modele.variableTaille, event.x + self.modele.variableTaille, event.y + self.modele.variableTaille)
+        for i in overlaps:
+            if i.gettag() != "tour" or i.gettag() != "route":
+                self.parent.creer_tour(self.typeTour,event.x, event.y)
+
     def acheter_tour(self):
-        self.parent.acheter_tour()
+        self.canevasGame.bind("<Button-1>", self.checkOverlap)
+
 
     def ameliorer_tour(self):
         self.parent.ameliorer_tour()
@@ -185,6 +205,12 @@ class Vue():
         for i in self.modele.creepActif:
             self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,i.posX + i.rayon,i.posY + i.rayon, fill="PaleGreen3", tags="creep")
 
+        for i in self.modele.tours:
+            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,i.posX + i.rayon,i.posY + i.rayon)
+
+    def find_overlapping(self,canvas, x1, y1, x2, y2):
+        overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
+        return overlapping_items
 '''
     def update_text(self):
         self.niv_wave_text.set("Vague: " + self.modele.niv_wave)
