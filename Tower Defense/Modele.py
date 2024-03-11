@@ -28,7 +28,6 @@ class Modele():
         self.isVague = False
         self.creerRoutes()
         self.creerChateau()
-        self.initCreepInactif()
         self.timeDebut = 0
         self.timeFin = 0
         self.timeTotal = 0
@@ -56,6 +55,14 @@ class Modele():
         ##Mouvement de tout les objets
         for i in self.creepActif:
             i.Mouvement()
+            
+        ##verif valeur dmg
+        for i in self.creepActif:
+            i.CreepVie()
+    def fin_vague(self):
+        self.projActif.clear()
+        self.argent = self.argent + self.niveauVague * 50
+        self.isVague = False
 
         ##verif valeur dmg
         for i in self.creepActif:
