@@ -1,7 +1,6 @@
 from Route import Route
 from creep import Creep
 
-
 class Modele():
     def __init__(self, parent):
         self.parent = parent

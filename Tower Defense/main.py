@@ -8,15 +8,17 @@ class Controleur():
         self.vue.root.mainloop()
 
     def initialiser_jeu(self):
-        self.modele.initialiser_jeu()
-        self.vue.afficher_interface()
+        self.vue.root.after(10000, self.boucle_jeu())
 
-    def debut_jeu(self):
-        self.modele.debut_vague()
 
     def boucle_jeu(self):
-        self.vue.afficher_jeu()
-        # if :
+        self.vue.afficher_all()
+       # self.vue.update_text()
+        if not self.modele.isVague:
+            self.modele.debut_vague()
+        if self.modele.isVague:
+            self.modele.mouvement_jeu()
+        #if not:
         #    self.modele.fin_vague()
         self.vue.root.after(50, self.boucle_jeu)
 
