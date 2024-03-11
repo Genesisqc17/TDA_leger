@@ -18,6 +18,7 @@ class Controleur():
             self.modele.debut_vague()
         if self.modele.isVague:
             self.modele.mouvement_jeu()
+            print("sort")
         #if not:
         #    self.modele.fin_vague()
         self.vue.root.after(50, self.boucle_jeu)

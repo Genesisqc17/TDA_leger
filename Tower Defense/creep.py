@@ -29,8 +29,8 @@ class Creep():
         else:
             self.currentRoute += 1
 
-        if self.currentRoute < self.parent.routes.size():
-            if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
+        if self.currentRoute < len(self.parent.routes):
+            if self.parent.routes[self.currentRoute].posX == self.parent.routes[self.currentRoute].posX2:
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
 
@@ -65,16 +65,15 @@ class Creep():
             self.vie = 0
 
     def Mouvement(self):
-        if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
-            if self.cibleY + 5 <= self.posY <= self.cibleY + 5:
+        if self.parent.routes[self.currentRoute].posX == self.parent.routes[self.currentRoute].posX2:
+            if self.cibleY - 5 <= self.posY <= self.cibleY + 5:
                 self.CreepCible()
-        elif self.parent.routes[self.currentRoute].posY == self.parent.routes(self.currentRoute).posY2:
-            if self.cibleX + 5 <= self.posX <= self.cibleX + 5:
+        elif self.parent.routes[self.currentRoute].posY == self.parent.routes[self.currentRoute].posY2:
+            if self.cibleX - 5 <= self.posX <= self.cibleX + 5:
                 self.CreepCible()
 
-        else:
-            self.posX = self.posX + self.vitesseX
-            self.posY = self.posY + self.vitesseY
+        self.posX = self.posX + self.vitesseX
+        self.posY = self.posY + self.vitesseY
 
 
     def CreepVie(self):

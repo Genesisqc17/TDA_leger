@@ -160,6 +160,8 @@ class Vue():
 
         return self.upgrade_frame
 
+    def acheter_tour(self):
+        self.parent.acheter_tour()
 
     def ameliorer_tour(self):
         self.parent.ameliorer_tour()
