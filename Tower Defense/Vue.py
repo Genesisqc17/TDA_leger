@@ -49,6 +49,10 @@ class Vue():
         self.frame_active = self.mes_frames[cle]
         self.frame_active.pack()
 
+    def commencer_partie(self):
+        self.afficher_parent()
+        self.parent.initialiser_jeu()
+
     def afficher_intro(self):
         self.changer_frame("intro")
 
@@ -66,7 +70,7 @@ class Vue():
                             font=self.police_label)
         self.login = Label(self.intro_frame, text="Entrez votre nom:", font=self.police_label)
         self.champ_nom = Entry(self.intro_frame)
-        self.commencer_partie_bouton = Button(self.intro_frame, text="Commencer!", command=self.afficher_parent,
+        self.commencer_partie_bouton = Button(self.intro_frame, text="Commencer!", command=self.commencer_partie,
                                               font=self.police_bouton)
         self.regles.pack()
         self.login.pack()
@@ -86,7 +90,6 @@ class Vue():
                                   bg="green3")
         self.canevasGame.place(x=0, y=0)
         self.canevasGame.pack()
-
 
         # Frame pour le menu interactif
         self.menu_frame = Frame(self.jeu_frame)
@@ -108,11 +111,11 @@ class Vue():
 
         # Boutons pour acheter tours
         self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour
-                                  ,font=self.police_bouton)
+                                  , font=self.police_bouton)
         self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour
-                                    ,font=self.police_bouton)
+                                    , font=self.police_bouton)
         self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour
-                                    ,font=self.police_bouton)
+                                    , font=self.police_bouton)
         self.poison_bouton.pack()
         self.eclair_bouton.pack()
         self.proj_bouton.pack()
@@ -136,24 +139,24 @@ class Vue():
         # Frame pour l'info d'une amélioration
         self.info_upgrade_frame = Frame(self.upgrade_frame)
         self.cout_upgrade = Label(self.info_upgrade_frame, textvariable=self.cout_upgrade_text
-                                  ,font=self.police_label)
+                                  , font=self.police_label)
         self.upgrade_force = Label(self.info_upgrade_frame, textvariable=self.force_upgrade_text
-                                    ,font=self.police_label)
+                                   , font=self.police_label)
         self.upgrade_etendu = Label(self.info_upgrade_frame, textvariable=self.etendu_upgrade_text
-                                    ,font=self.police_label)
+                                    , font=self.police_label)
 
         # Bouton pour améliorer une tour
         self.upgrade_bouton = Button(self.upgrade_frame, text="Améliorer", command=self.ameliorer_tour
-                                     ,font=self.police_bouton)
+                                     , font=self.police_bouton)
 
         # Frame pour l'info d'une tour
         self.info_tour = Frame(self.upgrade_frame)
         self.nom_tour = Label(self.info_tour, textvariable=self.nom_tour_text
-                              ,font=self.police_label)
+                              , font=self.police_label)
         self.force_tour = Label(self.info_tour, textvariable=self.force_tour_text
-                                ,font=self.police_label)
+                                , font=self.police_label)
         self.etendu_tour = Label(self.info_tour, textvariable=self.etendu_tour_text
-                                ,font=self.police_label)
+                                 , font=self.police_label)
 
         return self.upgrade_frame
 
@@ -176,5 +179,5 @@ class Vue():
         self.canevasGame.delete("all")
 
         for i in self.modele.routes:
-            self.canevasGame.create_line(i.posX,i.posY,i.posX2,i.posY2,width=self.modele.variableTaille + 6,fill="khaki1",tags= "route")
-
+            self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
+                                         fill="khaki1", tags="route")
