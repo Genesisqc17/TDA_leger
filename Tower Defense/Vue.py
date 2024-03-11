@@ -8,8 +8,9 @@ class Vue():
         self.canevas = None
         self.parent = parent
         self.modele = modele
+        self.root = Tk()
         self.niv_wave_text = StringVar()
-
+        self.niv_wave_text.set("Vague:")
         self.chrono_text = StringVar()
         self.chrono_text.set("Temps: ")
         self.nb_vies = StringVar()
@@ -30,7 +31,6 @@ class Vue():
         self.etendu_tour_text.set("Étendu: ")
         self.force_tour_text = StringVar()
         self.force_tour_text.set("Force: ")
-        self.root = Tk()
         self.root.title("Super Tower Defence 64")
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
         self.police_bouton = tkinter.font.Font(family="Terminal", size=12, weight="normal")
@@ -40,7 +40,6 @@ class Vue():
                            "gameover": self.creer_game_over()}
         self.frame_active = None
         self.changer_frame("intro")
-        self.canevas
 
     def changer_frame(self, cle):
         if self.frame_active:
@@ -68,22 +67,20 @@ class Vue():
         self.commencer_partie_bouton = Button(self.intro_frame, text="Commencer!", command=self.afficher_parent,
                                               font=self.police_bouton)
         self.regles.pack()
-        self.champ_nom.pack()
         self.login.pack()
+        self.champ_nom.pack()
         self.commencer_partie_bouton.pack()
-        self.intro_frame.pack()
 
         return self.intro_frame
 
     def creer_parent_frame(self):
         # Frame pour l'affichage complet
         self.parent_frame = Frame(self.root)
-        self.parent_frame.pack()
 
         # Frame pour la surface de jeu
         self.jeu_frame = Frame(self.parent_frame)
         self.jeu_frame.pack()
-        self.canevasGame = Canvas(self.jeu_frame, width=self.modele.jeu_tailleX, height=self.modele.jeu_tailleY,
+        self.canevasGame = Canvas(self.jeu_frame, width=self.modele.tailleX, height=self.modele.tailleY,
                                   bg="green3")
         self.canevasGame.place(x=0, y=0)
         self.canevasGame.pack()
@@ -133,7 +130,6 @@ class Vue():
     def creer_upgrade_frame(self):
         # Frame pour améliorer une tour
         self.upgrade_frame = Frame(self.menu_frame)
-        self.upgrade_frame.pack()
 
         # Frame pour l'info d'une amélioration
         self.info_upgrade_frame = Frame(self.upgrade_frame)
@@ -169,3 +165,6 @@ class Vue():
         self.gameover_frame = Frame(self.root)
 
         return self.gameover_frame
+
+    def afficher_all(self):
+        self.canevasGame.delete("all")
