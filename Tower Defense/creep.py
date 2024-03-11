@@ -43,17 +43,12 @@ class Creep():
 
 
     def Mouvement(self):
-        if self.cibleX:
-            self.posX, self.posY = hp.getAngledPoint(self.angle, self.vitesse,
-                                                     self.posX, self.posY)
-
-            dist = hp.calcDistance(self.posX, self.posY, self.cibleX, self.cibleY)
-
-            if dist <= self.vitesse:
-                self.CreepCible()
+        if self.cibleX == self.posX and self.cibleY == self.posY:
+            self.CreepCible()
 
         else:
-            self.CreepCible()
+            self.posX = self.posX + self.vitesseX
+            self.posY = self.posY + self.vitesseY
 
     def CreepVie(self):
         for dommage in self.dommages:
