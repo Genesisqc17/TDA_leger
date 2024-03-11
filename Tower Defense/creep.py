@@ -55,12 +55,12 @@ class Creep():
             self.vie = self.vie - dommage
             self.dommages.remove(dommage)
 
-        for i in self.dommageOverTime:
-            for j in self.dommageOverTime:
-                self.vie = self.vie
-                dommageOver[0][1] -= 1
-                if(dommageOver[0][1]<=0):
-                    self.dommageOverTime.remove(dommageOver[0])
+        ## for i in self.dommageOverTime:
+        ##    for j in self.dommageOverTime:
+        ##        self.vie = self.vie
+        ##        dommageOver[0][1] -= 1
+        ##        if(dommageOver[0][1]<=0):
+        ##            self.dommageOverTime.remove(dommageOver[0])
 
         if (self.vie <= 0):
             self.CreepMort()
