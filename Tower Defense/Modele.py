@@ -48,7 +48,7 @@ class Modele():
 
     def creerRoutes(self):
         r1 = Route(self, 5, 0, 5, 15)
-        r2 = Route(self, 11, 15, 11, 15)
+        r2 = Route(self, 5, 15, 11, 15)
         r3 = Route(self, 11, 15, 11, 4)
         r4 = Route(self, 11, 4, 28, 4)
         r5 = Route(self, 28, 4, 28, 9)
