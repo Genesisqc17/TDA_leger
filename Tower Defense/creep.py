@@ -23,14 +23,18 @@ class Creep():
         self.currentRoute = None
 
     def CreepCible(self):
-        if(self.currentRoute == None):
+        if self.currentRoute is None:
             self.currentRoute = 0
-        else: self.currentRoute += 1
+        else:
+            self.currentRoute += 1
 
-        if(self.currentRoute < self.parent.routes.size()):
-            self.cibleX = random.randrange(self.parent.routes[self.currentRoute].PosX2, self.parent.routes[self.currentRoute].PosXZoneCible)
-            self.cibleY = random.randrange(self.parent.routes[self.currentRoute].PosY2, self.parent.routes[self.currentRoute].PosYZoneCible)
-            self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
+        if self.currentRoute < self.parent.routes.size():
+            if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
+                self.cibleX = self.parent.routes[self.currentRoute].posX2
+                self.cibleY = self.parent.routes[self.currentRoute].posY2
+            else:
+                self.cibleX = self.parent.routes[self.currentRoute].posX2
+                self.cibleY = self.parent.routes[self.currentRoute].posY2
 
         else:
             self.parent.vie -= 1
