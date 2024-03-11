@@ -9,7 +9,7 @@ class Controleur():
 
     def initialiser_jeu(self):
         self.modele.initialiser_jeu()
-        self.vue.afficher_interface()
+
 
     def debut_jeu(self):
         self.modele.debut_vague()

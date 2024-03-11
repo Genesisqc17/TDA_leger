@@ -168,3 +168,6 @@ class Vue():
 
     def afficher_all(self):
         self.canevasGame.delete("all")
+
+        for i in self.modele.routes:
+            self.canevasGame.create_line(i.posX,i.posY,i.posX2,i.posY2,width=self.modele.variableTaille + 6,fill="khaki1",tags= "route")
