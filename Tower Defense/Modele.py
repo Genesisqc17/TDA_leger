@@ -1,5 +1,8 @@
 from Route import Route
 from creep import Creep
+from Tour import Tour
+import time
+
 
 class Modele():
     def __init__(self, parent):
@@ -30,8 +33,9 @@ class Modele():
         self.timeFin = 0
         self.timeTotal = 0
 
-    def ajouter_tour(self,posX, posY, type):
-        pass
+    def ajouter_tour(self, posX, posY, type):
+        self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
+        self.nextIdTour += 1
 
 
     def debut_vague(self):
