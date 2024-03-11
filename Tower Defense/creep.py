@@ -29,27 +29,53 @@ class Creep():
         else:
             self.currentRoute += 1
 
-        if self.currentRoute < len(self.parent.routes):
-            if self.parent.routes[self.currentRoute].posX == self.parent.routes[self.currentRoute].posX2:
+        if self.currentRoute < self.parent.routes.size():
+            if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
+
             else:
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
+
+            if self.currentRoute == 1:
+                self.vitesseX = 1
+                self.vitesseY = 0
+            elif self.currentRoute == 2:
+                self.vitesseX = 0
+                self.vitesseY = -1
+            elif self.currentRoute == 3:
+                self.vitesseX = 1
+                self.vitesseY = 0
+            elif self.currentRoute == 4:
+                self.vitesseX = 0
+                self.vitesseY = -1
+            elif self.currentRoute == 5:
+                self.vitesseX = -1
+                self.vitesseY = 0
+            elif self.currentRoute == 6:
+                self.vitesseX = 0
+                self.vitesseY = 1
+            elif self.currentRoute == 7:
+                self.vitesseX = 1
+                self.vitesseY = 0
 
         else:
             self.parent.vie -= 1
             self.vie = 0
 
-
-
     def Mouvement(self):
-        if self.cibleX == self.posX and self.cibleY == self.posY:
-            self.CreepCible()
+        if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
+            if self.cibleY + 5 <= self.posY <= self.cibleY + 5:
+                self.CreepCible()
+        elif self.parent.routes[self.currentRoute].posY == self.parent.routes(self.currentRoute).posY2:
+            if self.cibleX + 5 <= self.posX <= self.cibleX + 5:
+                self.CreepCible()
 
         else:
             self.posX = self.posX + self.vitesseX
             self.posY = self.posY + self.vitesseY
+
 
     def CreepVie(self):
         for dommage in self.dommages:
