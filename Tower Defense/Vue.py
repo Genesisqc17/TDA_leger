@@ -182,6 +182,9 @@ class Vue():
             self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
                                          fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
 
+        for i in self.modele.creepActif:
+            self.canevasGame.create_oval(i.posX,i.posY,i.posX + i.rayon,i.posY + i.rayon, fill="PaleGreen3", tags="creep")
+
 '''
     def update_text(self):
         self.niv_wave_text.set("Vague: " + self.modele.niv_wave)

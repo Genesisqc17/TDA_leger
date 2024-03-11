@@ -6,18 +6,19 @@ class Creep():
         self.posX = posX
         self.posY = posY
         self.vivant = True
-        self.vie = 10  * self.parent.niveau
+        self.vie = 10  * self.parent.niveauVague
         self.cibleX = None
         self.cibleY = None
         self.angle = None
-        self.vitesse = 3 * self.parent.niveau
-        self.rayon = 3
+        self.vitesseX = 0
+        self.vitesseY = 1
+        self.rayon = 10
         self.collisionX1 = posX - self.rayon
         self.collisionY1 = posY - self.rayon
         self.collisionX2 = posX + self.rayon
         self.collisionY2 = posX + self.rayon
         self.couleur = "red"
-        self.valeurArgent = 10 * self.parent.niveau
+        self.valeurArgent = 10 * self.parent.niveauVague
         self.dommageOverTime = []
         self.dommages = []
         self.currentRoute = None
@@ -28,8 +29,8 @@ class Creep():
         else:
             self.currentRoute += 1
 
-        if self.currentRoute < self.parent.routes.size():
-            if self.parent.routes[self.currentRoute].posX == self.parent.routes(self.currentRoute).posX2:
+        if self.currentRoute < len(self.parent.routes):
+            if self.parent.routes[self.currentRoute].posX == self.parent.routes[self.currentRoute].posX2:
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
             else:

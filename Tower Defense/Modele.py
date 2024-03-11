@@ -15,6 +15,7 @@ class Modele():
         self.box_tailleY = self.tailleY/3
         self.vie = 20
         self.argent = 0
+        self.niveauVague = 0
         self.creepActif = []
         self.creepInactif = []
         self.projActif = []
