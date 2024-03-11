@@ -4,7 +4,7 @@ from creep import Creep
 class Modele():
     def __init__(self, parent):
         self.parent = parent
-        self.variableTaille = 20
+        self.variableTaille = 40
         self.nbColonneWindow = 32
         self.nbLignesWindow = 24
         self.nbColonnesJeu = self.nbColonneWindow

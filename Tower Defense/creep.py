@@ -12,7 +12,7 @@ class Creep():
         self.angle = None
         self.vitesseX = 0
         self.vitesseY = 1
-        self.rayon = 10
+        self.rayon = 6
         self.collisionX1 = posX - self.rayon
         self.collisionY1 = posY - self.rayon
         self.collisionX2 = posX + self.rayon

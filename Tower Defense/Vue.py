@@ -160,8 +160,6 @@ class Vue():
 
         return self.upgrade_frame
 
-    def acheter_tour(self):
-        self.parent.acheter_tour()
 
     def ameliorer_tour(self):
         self.parent.ameliorer_tour()
@@ -183,7 +181,7 @@ class Vue():
                                          fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
 
         for i in self.modele.creepActif:
-            self.canevasGame.create_oval(i.posX,i.posY,i.posX + i.rayon,i.posY + i.rayon, fill="PaleGreen3", tags="creep")
+            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,i.posX + i.rayon,i.posY + i.rayon, fill="PaleGreen3", tags="creep")
 
 '''
     def update_text(self):
