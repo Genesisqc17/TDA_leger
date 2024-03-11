@@ -180,4 +180,4 @@ class Vue():
 
         for i in self.modele.routes:
             self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
-                                         fill="khaki1", tags="route")
+                                         fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
