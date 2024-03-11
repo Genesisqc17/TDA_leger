@@ -8,17 +8,28 @@ class Vue():
         self.canevas = None
         self.parent = parent
         self.modele = modele
-        #self.niv_wave_text = StringVar()
-        #self.chrono_text = StringVar()
-        #self.nb_vies = StringVar()
-        #self.qte_argent = StringVar()
-        #self.cout_upgrade_text = StringVar()
-        #self.force_upgrade_text = StringVar()
-        #self.etendu_upgrade_text = StringVar()
-        #self.nom_tour_text = StringVar()
-        #self.force_tour_text = StringVar()
-        #self.etendu_tour_text = StringVar()
-        #self.force_tour_text = StringVar()
+        self.niv_wave_text = StringVar()
+
+        self.chrono_text = StringVar()
+        self.chrono_text.set("Temps: ")
+        self.nb_vies = StringVar()
+        self.nb_vies.set("Vie: ")
+        self.qte_argent = StringVar()
+        self.qte_argent.set("Argent: ")
+        self.cout_upgrade_text = StringVar()
+        self.cout_upgrade_text.set("Coût: ")
+        self.force_upgrade_text = StringVar()
+        self.force_upgrade_text.set("Force: ")
+        self.etendu_upgrade_text = StringVar()
+        self.etendu_upgrade_text.set("Étendu: ")
+        self.nom_tour_text = StringVar()
+        self.nom_tour_text.set("Tour: ")
+        self.force_tour_text = StringVar()
+        self.force_tour_text.set("Force: ")
+        self.etendu_tour_text = StringVar()
+        self.etendu_tour_text.set("Étendu: ")
+        self.force_tour_text = StringVar()
+        self.force_tour_text.set("Force: ")
         self.root = Tk()
         self.root.title("Super Tower Defence 64")
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
@@ -29,6 +40,7 @@ class Vue():
                            "gameover": self.creer_game_over()}
         self.frame_active = None
         self.changer_frame("intro")
+        self.canevas
 
     def changer_frame(self, cle):
         if self.frame_active:
@@ -71,7 +83,10 @@ class Vue():
         # Frame pour la surface de jeu
         self.jeu_frame = Frame(self.parent_frame)
         self.jeu_frame.pack()
-        self.canevasGame
+        self.canevasGame = Canvas(self.jeu_frame, width=self.modele.jeu_tailleX, height=self.modele.jeu_tailleY,
+                                  bg="green3")
+        self.canevasGame.place(x=0, y=0)
+        self.canevasGame.pack()
 
 
         # Frame pour le menu interactif
@@ -80,9 +95,9 @@ class Vue():
 
         # Frame pour la vague et le chronomètre
         self.vc_frame = Frame(self.menu_frame)
-        self.niv_vague = Label(self.vc_frame#, textvariable=self.niv_wave_text
+        self.niv_vague = Label(self.vc_frame, textvariable=self.niv_wave_text
                                , font=self.police_label)
-        self.timer = Label(self.vc_frame#, textvariable=self.chrono_text
+        self.timer = Label(self.vc_frame, textvariable=self.chrono_text
                            , font=self.police_label)
         self.timer.pack()
         self.niv_vague.pack()
@@ -93,11 +108,11 @@ class Vue():
         self.tour_frame.pack()
 
         # Boutons pour acheter tours
-        self.proj_bouton = Button(self.tour_frame, text="Tour projectile"#, command=self.acheter_tour
+        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour
                                   ,font=self.police_bouton)
-        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair"#, command=self.acheter_tour
+        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour
                                     ,font=self.police_bouton)
-        self.poison_bouton = Button(self.tour_frame, text="Tour poison"#, command=self.acheter_tour
+        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour
                                     ,font=self.police_bouton)
         self.poison_bouton.pack()
         self.eclair_bouton.pack()
@@ -105,9 +120,9 @@ class Vue():
 
         # Frame pour la vie et l'argent
         self.va_frame = Frame(self.menu_frame)
-        self.cmp_nb_vies = Label(self.va_frame#, textvariable=self.nb_vies
+        self.cmp_nb_vies = Label(self.va_frame, textvariable=self.nb_vies
                                  , font=self.police_label)
-        self.cmp_argent = Label(self.va_frame#, textvariable=self.qte_argent
+        self.cmp_argent = Label(self.va_frame, textvariable=self.qte_argent
                                 , font=self.police_label)
         self.cmp_argent.pack()
         self.cmp_nb_vies.pack()
@@ -122,27 +137,33 @@ class Vue():
 
         # Frame pour l'info d'une amélioration
         self.info_upgrade_frame = Frame(self.upgrade_frame)
-        self.cout_upgrade = Label(self.info_upgrade_frame#, textvariable=self.cout_upgrade_text
+        self.cout_upgrade = Label(self.info_upgrade_frame, textvariable=self.cout_upgrade_text
                                   ,font=self.police_label)
-        self.upgrade_force = Label(self.info_upgrade_frame#, textvariable=self.force_upgrade_text
+        self.upgrade_force = Label(self.info_upgrade_frame, textvariable=self.force_upgrade_text
                                     ,font=self.police_label)
-        self.upgrade_etendu = Label(self.info_upgrade_frame#, textvariable=self.etendu_upgrade_text
+        self.upgrade_etendu = Label(self.info_upgrade_frame, textvariable=self.etendu_upgrade_text
                                     ,font=self.police_label)
 
         # Bouton pour améliorer une tour
-        self.upgrade_bouton = Button(self.upgrade_frame, text="Améliorer"#, command=self.ameliorer_tour
+        self.upgrade_bouton = Button(self.upgrade_frame, text="Améliorer", command=self.ameliorer_tour
                                      ,font=self.police_bouton)
 
         # Frame pour l'info d'une tour
         self.info_tour = Frame(self.upgrade_frame)
-        self.nom_tour = Label(self.info_tour#, textvariable=self.nom_tour_text
+        self.nom_tour = Label(self.info_tour, textvariable=self.nom_tour_text
                               ,font=self.police_label)
-        self.force_tour = Label(self.info_tour#, textvariable=self.force_tour_text
+        self.force_tour = Label(self.info_tour, textvariable=self.force_tour_text
                                 ,font=self.police_label)
-        self.etendu_tour = Label(self.info_tour#, textvariable=self.etendu_tour_text
+        self.etendu_tour = Label(self.info_tour, textvariable=self.etendu_tour_text
                                 ,font=self.police_label)
 
         return self.upgrade_frame
+
+    def acheter_tour(self):
+        self.parent.acheter_tour()
+
+    def ameliorer_tour(self):
+        self.parent.ameliorer_tour()
 
     def creer_game_over(self):
         self.gameover_frame = Frame(self.root)
