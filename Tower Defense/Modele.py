@@ -26,10 +26,17 @@ class Modele():
         self.isVague = False
         self.creerRoutes()
         self.creerChateau()
-        self.initCreepInactif()
+        self.timeDebut = 0
+        self.timeFin = 0
+        self.timeTotal = 0
+
+    def ajouter_tour(self,posX, posY, type):
+        pass
+
 
     def debut_vague(self):
         self.niveauVague += 1
+        self.initCreepInactif()
         for i in self.creepInactif:
             self.creepActif.append(i)
 
@@ -37,10 +44,19 @@ class Modele():
         for i in self.creepActif:
             i.CreepCible()
         self.isVague = True
+        self.timeFin = time.time()
+        self.timeFin = time.time()
 
     def mouvement_jeu(self):
         for i in self.creepActif:
             i.Mouvement()
+        self.timeFin = time.time()
+        self.timeTotal = self.timeFin - self.timeDebut
+
+    def fin_vague(self):
+        self.projActif.clear()
+        self.argent = self.argent + self.niveauVague * 50
+        self.isVague = False
 
     def initialiser_jeu(self):
         pass
