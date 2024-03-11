@@ -1,4 +1,6 @@
 from Route import Route
+from creep import Creep
+
 
 class Modele():
     def __init__(self, parent):
@@ -24,6 +26,25 @@ class Modele():
         self.isVague = False
         self.creerRoutes()
         self.creerChateau()
+        self.initCreepInactif()
+
+    def debut_vague(self):
+        self.niveauVague += 1
+        for i in self.creepInactif:
+            self.creepActif.append(i)
+
+        self.creepInactif.clear()
+        for i in self.creepActif:
+            i.CreepCible()
+        self.isVague = True
+
+    def initialiser_jeu(self):
+        pass
+
+    def initCreepInactif(self):
+        for x in range(20):
+            self.creepInactif.append(Creep(self, 5 * self.variableTaille, 0 * self.variableTaille))
+
 
     def creerRoutes(self):
         r1 = Route(self, 5, 0, 5, 15)
