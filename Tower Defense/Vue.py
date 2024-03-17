@@ -175,9 +175,14 @@ class Vue():
 
     def checkOverlap(self, event):
         overlaps = self.find_overlapping(self.canevasGame, event.x - self.modele.variableTaille, event.y - self.modele.variableTaille, event.x + self.modele.variableTaille, event.y + self.modele.variableTaille)
-        for i in overlaps:
-            if i.gettag() != "tour" and i.gettag() != "route":
-                self.parent.creer_tour(self.typeTour,event.x, event.y)
+        overlap_route_ou_tour = False
+        for item_id in overlaps:
+            tags = self.canevasGame.gettags(item_id)
+            if "tour" in tags and "route" in tags:
+                overlap_route_ou_tour = True
+                break
+        if not overlap_route_ou_tour:
+            self.parent.creer_tour(self.typeTour, event.x, event.y)
 
     def acheter_tour(self):
         self.canevasGame.bind("<Button-1>", self.checkOverlap)

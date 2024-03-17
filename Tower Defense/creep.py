@@ -38,16 +38,17 @@ class Creep():
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
 
-            if self.modele.routes[self.currentRoute].posX2 < self.posX:
+            '''
+            if self.parent.routes[self.currentRoute].posX2 < self.posX:
                 self.vitesseX = -1
-            elif self.modele.routes[self.currentRoute].posX2 > self.posX:
+            elif self.parent.routes[self.currentRoute].posX2 > self.posX:
                 self.vitesseX = 1
 
-            if self.modele.routes[self.currentRoute].posY2 < self.posY:
+            if self.parent.routes[self.currentRoute].posY2 < self.posY:
                 self.vitesseY = -1
-            elif self.modele.routes[self.currentRoute].posY2 > self.posY:
+            elif self.parent.routes[self.currentRoute].posY2 > self.posY:
                 self.vitesseY = 1
-
+            '''
 
 
             if self.currentRoute == 1:
