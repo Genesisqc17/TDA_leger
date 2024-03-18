@@ -40,8 +40,11 @@ class Projectile:
                     zone_collision[3] < zone_creep[1] or
                     zone_collision[1] > zone_creep[3]):
                 creep.dommages.append(self.dommage)
+                print("collide")
+
 
     def mouvement(self):
+
         self.posX, self.posY = hp.getAngledPoint(self.angle, self.vitesse, self.posX, self.posY)
         dist = hp.calcDistance(self.posX, self.posY, self.cibleX, self.cibleY)
         if dist <= self.vitesse:
