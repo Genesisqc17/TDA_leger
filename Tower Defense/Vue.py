@@ -204,19 +204,31 @@ class Vue():
         self.canevasGame.delete("all")
 
         for i in self.modele.routes:
-            self.canevasGame.create_line(i.posX, i.posY, i.posX2, i.posY2, width=self.modele.variableTaille + 6,
+            self.canevasGame.create_line(i.posX, i.posY,
+                                         i.posX2, i.posY2,
+                                         width=self.modele.variableTaille + 6,
                                          fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
 
         for i in self.modele.creepActif:
-            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,i.posX + i.rayon,i.posY + i.rayon, fill="PaleGreen3", tags="creep")
+            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
+                                         i.posX + i.rayon,i.posY + i.rayon,
+                                         fill="PaleGreen3", tags="creep")
 
         for i in self.modele.tours:
-            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,i.posX + i.rayon,i.posY + i.rayon)
+            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
+                                         i.posX + i.rayon,i.posY + i.rayon,
+                                         fill="slate gray", tags="tour")
+
+        for i in self.modele.projActif:
+            self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                         i.posX + i.rayon, i.posY + i.rayon,
+                                         fill="gold", tags="proj")
 
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
         return overlapping_items
-'''
+
+    '''
     def update_text(self):
         self.niv_wave_text.set("Vague: " + self.modele.niv_wave)
         self.chrono_text.set("Chrono: " + self.modele.chrono)
@@ -229,4 +241,4 @@ class Vue():
         self.force_tour_text.set("Force: " + self.modele.force_tour)
         self.etendu_tour_text.set("Étendu: " + self.modele.etendu_tour)
         self.force_tour_text.set("Force: " + self.modele.force_tour)
-        '''
+    '''

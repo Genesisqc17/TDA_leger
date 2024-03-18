@@ -11,7 +11,7 @@ class Tour():
         self.cibleX = None
         self.cibleY = None
         self.niveauForce = 1
-        self.rayon = self.parent.variableTaille
+        self.rayon = self.parent.variableTaille / 2
         self.cout = None
         self.etendu = None
         self.couleur = None
