@@ -228,11 +228,11 @@ class Vue():
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
         return overlapping_items
 
-    '''
+
     def update_text(self):
-        self.niv_wave_text.set("Vague: " + self.modele.niv_wave)
+        self.niv_wave_text.set("Vague: " + self.modele.niveauVague)
         self.chrono_text.set("Chrono: " + self.modele.chrono)
-        self.nb_vies.set("Vie: " + self.modele.vie)
+        self.nb_vies.set("Vie: " + self.modele.tours.cout)
         self.qte_argent.set("Argent: " + self.modele.argent)
         self.cout_upgrade_text.set("Coût: " + self.modele.cost_tour)
         self.force_upgrade_text.set("Force: " + self.modele.force_upgrade)
@@ -241,4 +241,4 @@ class Vue():
         self.force_tour_text.set("Force: " + self.modele.force_tour)
         self.etendu_tour_text.set("Étendu: " + self.modele.etendu_tour)
         self.force_tour_text.set("Force: " + self.modele.force_tour)
-    '''
+
