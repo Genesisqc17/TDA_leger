@@ -8,6 +8,10 @@ class Controleur():
         self.vue.root.mainloop()
 
     def initialiser_jeu(self):
+<<<<<<< HEAD
+=======
+        self.vue.afficher_all()
+>>>>>>> 467c475608cc93372fcc82c7dbc460f4fcf4a4b5
         self.boucle_jeu()
 
     def creer_tour(self,type, posX, posY):
@@ -16,6 +20,7 @@ class Controleur():
 
     def boucle_jeu(self):
         self.vue.afficher_all()
+        self.vue.update_text()
        # self.vue.update_text()
         if not self.modele.isVague:
             self.modele.debut_vague()

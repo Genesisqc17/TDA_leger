@@ -10,11 +10,11 @@ class Projectile:
         self.niveauTour = niveauTour
         self.vitesse = 1
         self.dommage = None
-        self.rayon = 8
+        self.rayon = 4
         self.angle = None
         self.etenduCollision = 1
-        self.trouver_cible()
         self.calculDommageVitesse()
+        self.trouver_cible()
 
     def calculDommageVitesse(self):
         if self.niveauTour == 1:
@@ -41,6 +41,7 @@ class Projectile:
                     zone_collision[1] > zone_creep[3]):
                 creep.dommages.append(self.dommage)
                 print("collide")
+
 
     def mouvement(self):
 
