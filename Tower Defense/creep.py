@@ -62,7 +62,7 @@ class Creep():
                 self.vitesseY = 0
             elif self.currentRoute == 4:
                 self.vitesseX = 0
-                self.vitesseY = -1
+                self.vitesseY = 1
             elif self.currentRoute == 5:
                 self.vitesseX = -1
                 self.vitesseY = 0
