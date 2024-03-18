@@ -131,6 +131,8 @@ class Vue():
         self.cmp_nb_vies.pack()
         self.va_frame.pack(side=LEFT)
 
+        self.canevasGame.bind("<Button-1>", self.ameliorer_tour)
+
         return self.parent_frame
 
     def creer_upgrade_frame(self):
@@ -178,17 +180,21 @@ class Vue():
         overlap_route_ou_tour = False
         for item_id in overlaps:
             tags = self.canevasGame.gettags(item_id)
-            if "tour" in tags and "route" in tags:
+            if "NoOverlap" in tags:
                 overlap_route_ou_tour = True
                 break
         if not overlap_route_ou_tour:
             self.parent.creer_tour(self.typeTour, event.x, event.y)
+            self.canevasGame.unbind("<Button-1>")
+            self.canevasGame.bind("<Button-1>", self.ameliorer_tour)
 
     def acheter_tour(self):
+        self.canevasGame.unbind("<Button-1>")
         self.canevasGame.bind("<Button-1>", self.checkOverlap)
 
 
-    def ameliorer_tour(self):
+    def ameliorer_tour(self, event):
+
         self.parent.ameliorer_tour()
 
     def creer_game_over(self):
@@ -207,7 +213,7 @@ class Vue():
             self.canevasGame.create_line(i.posX, i.posY,
                                          i.posX2, i.posY2,
                                          width=self.modele.variableTaille + 6,
-                                         fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags="route")
+                                         fill="khaki1",capstyle=ROUND, joinstyle=ROUND, tags=("route", "NoOverlap"))
 
         for i in self.modele.creepActif:
             self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
@@ -217,7 +223,7 @@ class Vue():
         for i in self.modele.tours:
             self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
                                          i.posX + i.rayon,i.posY + i.rayon,
-                                         fill="slate gray", tags="tour")
+                                         fill="slate gray", tags=(f"tour{str(i.id)}", "NoOverlap"))
 
         for i in self.modele.projActif:
             self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
@@ -230,7 +236,7 @@ class Vue():
 
 
     def update_text(self):
-        self.niv_wave_text.set("Vague: " + self.modele.niveauVague)
+        self.niv_wave_text.set(f"Vague: self.modele.niveauVague)
         self.chrono_text.set("Chrono: " + self.modele.chrono)
         self.nb_vies.set("Vie: " + self.modele.tours.cout)
         self.qte_argent.set("Argent: " + self.modele.argent)

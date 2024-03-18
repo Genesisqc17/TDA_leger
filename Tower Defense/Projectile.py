@@ -32,8 +32,8 @@ class Projectile:
 
     def checkCollision(self):
         zone_collision = (self.posX - self.rayon) - self.etenduCollision, (self.posY - self.rayon) - self.etenduCollision, (self.posX + self.rayon) + self.etenduCollision, (self.posY + self.rayon) + self.etenduCollision
-        for creep in self.parent.creepActif:
-            zone_creep = (creep.CollisionX1,creep.CollisionY1,creep.CollisionX2,creep.CollisionY2)
+        for creep in self.parent.parent.creepActif:
+            zone_creep = (creep.collisionX1,creep.collisionY1,creep.collisionX2,creep.collisionY2)
 
             if not (zone_collision[2] < zone_creep[0] or
                     zone_collision[0] > zone_creep[2] or
