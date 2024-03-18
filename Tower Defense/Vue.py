@@ -97,61 +97,6 @@ class Vue():
         self.menu_frame.pack()
 
         # Frame pour la vague et le chronomètre
-        self.vc_frame = Frame(self.menu_frame)
-        self.niv_vague = Label(self.vc_frame, textvariable=self.niv_wave_text
-                               , font=self.police_label)
-        self.timer = Label(self.vc_frame, textvariable=self.chrono_text
-                           , font=self.police_label)
-        self.timer.pack()
-        self.niv_vague.pack()
-        self.vc_frame.pack(side=LEFT)
-
-        # Frame pour acheter une tour
-        self.tour_frame = Frame(self.menu_frame)
-        self.tour_frame.pack(side=LEFT)
-
-        # Boutons pour acheter tours
-        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour_proj
-                                  , font=self.police_bouton)
-        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour_eclair
-                                    , font=self.police_bouton)
-        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour_poison
-                                    , font=self.police_bouton)
-        self.poison_bouton.pack(side=LEFT)
-        self.eclair_bouton.pack(side=LEFT)
-        self.proj_bouton.pack(side=LEFT)
-
-        # Frame pour la vie et l'argent
-        self.va_frame = Frame(self.menu_frame)
-        self.cmp_nb_vies = Label(self.va_frame, textvariable=self.nb_vies
-                                 , font=self.police_label)
-        self.cmp_argent = Label(self.va_frame, textvariable=self.qte_argent
-                                , font=self.police_label)
-        self.cmp_argent.pack()
-        self.cmp_nb_vies.pack()
-        self.va_frame.pack(side=LEFT)
-
-        self.canevasGame.bind("<Button-1>", self.ameliorer_tour)
-
-        return self.parent_frame
-
-    def creer_parent_frame(self):
-        # Frame pour l'affichage complet
-        self.parent_frame = Frame(self.root)
-
-        # Frame pour la surface de jeu
-        self.jeu_frame = Frame(self.parent_frame)
-        self.jeu_frame.pack()
-        self.canevasGame = Canvas(self.jeu_frame, width=self.modele.tailleX, height=self.modele.tailleY,
-                                  bg="green3")
-        self.canevasGame.place(x=0, y=0)
-        self.canevasGame.pack()
-
-        # Frame pour le menu interactif
-        self.menu_frame = Frame(self.jeu_frame)
-        self.menu_frame.pack()
-
-        # Frame pour la vague et le chronomètre
         self.vc_frame = Frame(self.menu_frame, highlightbackground="black", highlightthickness=1)
         self.niv_vague = Label(self.vc_frame, textvariable=self.niv_wave_text
                                , font=self.police_label)
@@ -254,6 +199,7 @@ class Vue():
             self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
                                          i.posX + i.rayon, i.posY + i.rayon,
                                          fill="gold", tags="proj")
+
 
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
