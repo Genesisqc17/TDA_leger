@@ -135,33 +135,58 @@ class Vue():
 
         return self.parent_frame
 
-    def creer_upgrade_frame(self):
-        # Frame pour améliorer une tour
-        self.upgrade_frame = Frame(self.menu_frame)
+    def creer_parent_frame(self):
+        # Frame pour l'affichage complet
+        self.parent_frame = Frame(self.root)
 
-        # Frame pour l'info d'une amélioration
-        self.info_upgrade_frame = Frame(self.upgrade_frame)
-        self.cout_upgrade = Label(self.info_upgrade_frame, textvariable=self.cout_upgrade_text
-                                  , font=self.police_label)
-        self.upgrade_force = Label(self.info_upgrade_frame, textvariable=self.force_upgrade_text
-                                   , font=self.police_label)
-        self.upgrade_etendu = Label(self.info_upgrade_frame, textvariable=self.etendu_upgrade_text
-                                    , font=self.police_label)
+        # Frame pour la surface de jeu
+        self.jeu_frame = Frame(self.parent_frame)
+        self.jeu_frame.pack()
+        self.canevasGame = Canvas(self.jeu_frame, width=self.modele.tailleX, height=self.modele.tailleY,
+                                  bg="green3")
+        self.canevasGame.place(x=0, y=0)
+        self.canevasGame.pack()
 
-        # Bouton pour améliorer une tour
-        self.upgrade_bouton = Button(self.upgrade_frame, text="Améliorer", command=self.ameliorer_tour
-                                     , font=self.police_bouton)
+        # Frame pour le menu interactif
+        self.menu_frame = Frame(self.jeu_frame)
+        self.menu_frame.pack()
 
-        # Frame pour l'info d'une tour
-        self.info_tour = Frame(self.upgrade_frame)
-        self.nom_tour = Label(self.info_tour, textvariable=self.nom_tour_text
-                              , font=self.police_label)
-        self.force_tour = Label(self.info_tour, textvariable=self.force_tour_text
-                                , font=self.police_label)
-        self.etendu_tour = Label(self.info_tour, textvariable=self.etendu_tour_text
+        # Frame pour la vague et le chronomètre
+        self.vc_frame = Frame(self.menu_frame, highlightbackground="black", highlightthickness=1)
+        self.niv_vague = Label(self.vc_frame, textvariable=self.niv_wave_text
+                               , font=self.police_label)
+        self.timer = Label(self.vc_frame, textvariable=self.chrono_text
+                           , font=self.police_label)
+        self.timer.pack()
+        self.niv_vague.pack()
+        self.vc_frame.pack(side=LEFT, padx=150, pady=10)
+
+        # Frame pour acheter une tour
+        self.tour_frame = Frame(self.menu_frame)
+        self.tour_frame.pack(side=LEFT, padx=150, pady=10)
+
+        # Boutons pour acheter tours
+        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour_proj
+                                  , font=self.police_bouton)
+        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour_eclair
+                                    , font=self.police_bouton)
+        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour_poison
+                                    , font=self.police_bouton)
+        self.poison_bouton.pack()
+        self.eclair_bouton.pack()
+        self.proj_bouton.pack()
+
+        # Frame pour la vie et l'argent
+        self.va_frame = Frame(self.menu_frame, highlightbackground="black", highlightthickness=1)
+        self.cmp_nb_vies = Label(self.va_frame, textvariable=self.nb_vies
                                  , font=self.police_label)
+        self.cmp_argent = Label(self.va_frame, textvariable=self.qte_argent
+                                , font=self.police_label)
+        self.cmp_argent.pack()
+        self.cmp_nb_vies.pack()
+        self.va_frame.pack(side=LEFT, padx=150, pady=10)
 
-        return self.upgrade_frame
+        return self.parent_frame
 
     def acheter_tour_proj(self):
         self.acheter_tour()
@@ -236,15 +261,16 @@ class Vue():
 
 
     def update_text(self):
-        self.niv_wave_text.set(f"Vague: self.modele.niveauVague)
-        self.chrono_text.set("Chrono: " + self.modele.chrono)
-        self.nb_vies.set("Vie: " + self.modele.tours.cout)
-        self.qte_argent.set("Argent: " + self.modele.argent)
-        self.cout_upgrade_text.set("Coût: " + self.modele.cost_tour)
-        self.force_upgrade_text.set("Force: " + self.modele.force_upgrade)
-        self.etendu_upgrade_text.set("Étendu: " + self.modele.etendu_upgrade)
-        self.nom_tour_text.set("Tour: " + self.modele.type_tour)
-        self.force_tour_text.set("Force: " + self.modele.force_tour)
-        self.etendu_tour_text.set("Étendu: " + self.modele.etendu_tour)
-        self.force_tour_text.set("Force: " + self.modele.force_tour)
+        self.niv_wave_text.set("Vague: " + str(self.modele.niveauVague))
+        # self.chrono_text.set("Chrono: " + str(self.modele.chrono))
+        self.nb_vies.set("Vie: " + str(self.modele.vie))
+        self.qte_argent.set("Argent: " + str(self.modele.argent) + "$")
+        # self.cout_upgrade_text.set("Coût: " + str(self.modele.cost_tour))
+        # self.force_upgrade_text.set("Force: " + str(self.modele.force_upgrade))
+        # self.etendu_upgrade_text.set("Étendu: " + str(self.modele.etendu_upgrade))
+        # self.nom_tour_text.set("Tour: " + str(self.modele.type_tour))
+        # self.force_tour_text.set("Force: " + str(self.modele.force_tour))
+        # self.etendu_tour_text.set("Étendu: " + str(self.modele.etendu_tour))
+        # self.force_tour_text.set("Force: " + str(self.modele.force_tour))
+
 
