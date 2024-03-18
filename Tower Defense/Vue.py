@@ -236,7 +236,7 @@ class Vue():
 
 
     def update_text(self):
-        self.niv_wave_text.set(f"Vague: self.modele.niveauVague)
+        self.niv_wave_text.set("Vague:" + self.modele.niveauVague)
         self.chrono_text.set("Chrono: " + self.modele.chrono)
         self.nb_vies.set("Vie: " + self.modele.tours.cout)
         self.qte_argent.set("Argent: " + self.modele.argent)
