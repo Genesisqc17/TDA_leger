@@ -13,7 +13,7 @@ class Tour():
         self.niveauForce = 1
         self.rayon = self.parent.variableTaille / 2
         self.cout = None
-        self.etendu = None
+        self.etendu = self.parent.variableTaille * 3
         self.couleur = None
         self.frequenceTirs = None
         self.initDifTour()
@@ -36,8 +36,10 @@ class Tour():
 
     def tirer(self):
         self.trouverCible()
-        if self.type == "tProjectile" and self.parent.timeTotal % self.frequenceTirs == 0:
-           self.parent.projActif.append(Projectile)
+        print(self.parent.timeTotal)
+        if self.type == "tProjectile" and int(self.parent.timeTotal) % self.frequenceTirs == 0:
+           self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
+           print("tirer proj")
         elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
             ## self.parent.projActif.append(Eclair)
             pass
@@ -47,9 +49,10 @@ class Tour():
 
     def trouverCible(self):
         for i in self.parent.creepActif:
-            if math.sqrt(math.pow((i.posX - self.posX)) + math.pow((i.posY-self.posY))) < self.etendu:
+            if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
+
 
 
     def ameliorer(self, prix):
