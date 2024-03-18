@@ -8,7 +8,7 @@ class Controleur():
         self.vue.root.mainloop()
 
     def initialiser_jeu(self):
-        self.vue.root.after(10000, self.boucle_jeu())
+        self.boucle_jeu()
 
     def creer_tour(self,type, posX, posY):
         self.modele.ajouter_tour(posX,posY,type)

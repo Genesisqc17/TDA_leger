@@ -31,6 +31,7 @@ class Modele():
         self.timeDebut = 0
         self.timeFin = 0
         self.timeTotal = 0
+        self.intervalSpawnCreep = 1
 
     def ajouter_tour(self, posX, posY, type):
         self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
@@ -38,27 +39,47 @@ class Modele():
 
     def debut_vague(self):
         self.niveauVague += 1
+        self.intervalSpawnCreep = 1
         self.initCreepInactif()
         for i in self.creepInactif:
             i.CreepCible()
 
         self.isVague = True
-        self.timeFin = time.time()
+        self.timeDebut = time.time()
         self.timeFin = time.time()
 
     def mouvement_jeu(self):
         self.timeFin = time.time()
         self.timeTotal = self.timeFin - self.timeDebut
-        if int(self.timeTotal) % 2 == 0 and len(self.creepInactif) != 0:
+        elapsed_seconds = int (self.timeTotal)
+
+        if self.timeTotal >= self.intervalSpawnCreep and len(self.creepInactif) != 0:
             self.creepActif.append(self.creepInactif[-1])
             self.creepInactif = self.creepInactif[:-1]
+            self.intervalSpawnCreep += 5
+
+            print(elapsed_seconds)
+
+
+        ## Trouver cible de tour
+        if len(self.creepActif) != 0:
+            for i in self.tours:
+                i.trouverCible()
+            ## tirer
+            for i in self.tours:
+                if i.cibleX != None:
+                    i.tirer()
         ##Mouvement de tout les objets
         for i in self.creepActif:
             i.Mouvement()
+        if len(self.projActif) != 0:
+            for i in self.projActif:
+                i.mouvement()
             
         ##verif valeur dmg
-        for i in self.creepActif:
-            i.CreepVie()
+        if len(self.creepActif) != 0:
+            for i in self.creepActif:
+                i.CreepVie()
     def fin_vague(self):
         self.projActif.clear()
         self.argent = self.argent + self.niveauVague * 50
