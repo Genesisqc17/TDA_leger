@@ -1,6 +1,6 @@
 import math
 from Projectile import Projectile
-
+from Eclair import Eclair
 class Tour():
     def __init__(self, parent, posX, posY, type, id):
         self.parent = parent
@@ -41,8 +41,7 @@ class Tour():
            self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
            print("tirer proj")
         elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
-            ## self.parent.projActif.append(Eclair)
-            pass
+           self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
         elif self.type == "tPoison" and self.parent.timeTotal % self.frequenceTirs == 0:
             ## self.parent.projActif.append(Poison)
             pass
