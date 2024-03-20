@@ -111,11 +111,11 @@ class Vue():
         self.tour_frame.pack(side=LEFT, padx=150, pady=10)
 
         # Boutons pour acheter tours
-        self.proj_bouton = Button(self.tour_frame, text="Tour projectile", command=self.acheter_tour_proj
+        self.proj_bouton = Button(self.tour_frame, text="Tour projectile 3$", command=self.acheter_tour_proj
                                   , font=self.police_bouton)
-        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair", command=self.acheter_tour_eclair
+        self.eclair_bouton = Button(self.tour_frame, text="Tour éclair 2$", command=self.acheter_tour_eclair
                                     , font=self.police_bouton)
-        self.poison_bouton = Button(self.tour_frame, text="Tour poison", command=self.acheter_tour_poison
+        self.poison_bouton = Button(self.tour_frame, text="Tour poison 5$", command=self.acheter_tour_poison
                                     , font=self.police_bouton)
         self.poison_bouton.pack()
         self.eclair_bouton.pack()
@@ -193,7 +193,7 @@ class Vue():
         for i in self.modele.tours:
             self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
                                          i.posX + i.rayon,i.posY + i.rayon,
-                                         fill="slate gray", tags=(f"tour{str(i.id)}", "NoOverlap"))
+                                         fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap"))
 
         for i in self.modele.projActif:
             self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,

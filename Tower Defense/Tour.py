@@ -22,17 +22,17 @@ class Tour():
         if self.type == "tProjectile":
             self.cout = 5
             self.frequenceTirs = 3
-            self.couleur = "RED"
+            self.couleur = "goldenrod"
 
         elif self.type == "tEclair":
             self.cout = 2
             self.frequenceTirs = 1
-            self.couleur = "BLUE"
+            self.couleur = "midnight blue"
 
         elif self.type == "tPoison":
             self.cout = 3
             self.frequenceTirs = 2
-            self.couleur = "GREEN"
+            self.couleur = "forest green"
 
     def tirer(self):
         self.trouverCible()
@@ -47,10 +47,28 @@ class Tour():
             pass
 
     def trouverCible(self):
-        for i in self.parent.creepActif:
+        """for i in self.parent.creepActif:
             if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
+        """
+
+        min_distance = float('inf')  # Initialize with infinity
+        closest_creep = None
+
+        for i in self.parent.creepActif:
+            distance = math.sqrt((i.posX - self.posX) ** 2 + (i.posY - self.posY) ** 2)
+            if distance < min_distance:
+                min_distance = distance
+                closest_creep = i
+
+        if closest_creep:
+            # Predict the future position by adding a fraction of the velocity to the current position
+            future_posX = closest_creep.posX + closest_creep.vitesseX * 0.5  # Adjust 0.1 as needed
+            future_posY = closest_creep.posY + closest_creep.vitesseY * 0.5  # Adjust 0.1 as needed
+
+            self.cibleX = future_posX
+            self.cibleY = future_posY
 
 
 

@@ -16,7 +16,7 @@ class Modele():
         self.box_tailleX = self.tailleX
         self.box_tailleY = self.tailleY/3
         self.vie = 20
-        self.argent = 0
+        self.argent = 10
         self.niveauVague = 0
         self.creepActif = []
         self.creepInactif = []
@@ -34,8 +34,12 @@ class Modele():
         self.intervalSpawnCreep = 1
 
     def ajouter_tour(self, posX, posY, type):
-        self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
-        self.nextIdTour += 1
+        nouvelleTour = Tour(self,posX,posY,type,self.nextIdTour)
+        if(self.argent >= nouvelleTour.cout):
+            self.argent -= nouvelleTour.cout
+            self.tours.append(nouvelleTour)
+            #self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
+            self.nextIdTour += 1
 
     def debut_vague(self):
         self.niveauVague += 1
@@ -69,6 +73,28 @@ class Modele():
             for i in self.tours:
                 if i.cibleX != None:
                     i.tirer()
+
+            ## Trouve les creeps mort
+            creepsMort = []
+            for i in self.creepActif:
+                if i.vivant == False:
+                    creepsMort.append(i)
+            ## Enleve les creeps mort de creepActif
+            for i in creepsMort:
+                self.creepActif.remove(i)
+                self.argent += 2 * self.niveauVague
+
+
+        ## Trouve les projectiles qui ont collided
+        if len(self.projActif) != 0:
+            collidedProjectiles = []
+            for i in self.projActif:
+                if i.collided == True:
+                    collidedProjectiles.append(i)
+
+            for i in collidedProjectiles:
+                self.projActif.remove(i)
+
         ##Mouvement de tout les objets
         for i in self.creepActif:
             i.Mouvement()
