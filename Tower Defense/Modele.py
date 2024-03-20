@@ -41,6 +41,15 @@ class Modele():
             #self.tours.append(Tour(self, posX, posY, type, self.nextIdTour))
             self.nextIdTour += 1
 
+
+    def ameliorer_tour(self,id_tour):
+        for i in self.tours:
+            if i.id == id_tour:
+                if self.argent >= i.cout:
+                    self.argent -= i.cout
+                    i.ameliorer()
+
+
     def debut_vague(self):
         self.niveauVague += 1
         self.intervalSpawnCreep = 1

@@ -14,6 +14,8 @@ class Controleur():
     def creer_tour(self,type, posX, posY):
         self.modele.ajouter_tour(posX,posY,type)
 
+    def ameliorer_tour(self,id_tour):
+        self.modele.ameliorer_tour(id_tour)
 
     def boucle_jeu(self):
         self.vue.afficher_all()

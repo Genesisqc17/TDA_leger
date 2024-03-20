@@ -47,13 +47,13 @@ class Tour():
             pass
 
     def trouverCible(self):
-        """for i in self.parent.creepActif:
+        for i in self.parent.creepActif:
             if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
-        """
 
-        min_distance = float('inf')  # Initialize with infinity
+
+        """min_distance = float('inf')  # Initialize with infinity
         closest_creep = None
 
         for i in self.parent.creepActif:
@@ -68,7 +68,7 @@ class Tour():
             future_posY = closest_creep.posY + closest_creep.vitesseY * 0.5  # Adjust 0.1 as needed
 
             self.cibleX = future_posX
-            self.cibleY = future_posY
+            self.cibleY = future_posY"""
 
 
 
