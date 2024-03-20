@@ -296,9 +296,6 @@ class Vue():
 
 
 
-
-
-
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
         return overlapping_items

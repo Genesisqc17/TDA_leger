@@ -12,10 +12,6 @@ class Eclair:
         self.cible = None
         self.dommage_niveau()
         self.trouver_cible()
-        # self.cibleX = cibleX
-        # self.cibleY = cibleY
-        # self.vitesse = None
-        # self.angle = None
 
     def dommage_niveau(self):
         if self.niveauTour == 1:
@@ -61,29 +57,7 @@ class Eclair:
 
 
 
-    # def trouver_cible(self):
-    #     self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
 
-
-    # def mouvement(self):
-    #     if self.niveauTour == 1:
-    #         self.posX, self.posY = hp.getAngledPoint(self.angle, self.vitesse, self.posX, self.posY)
-    #         dist = hp.calcDistance(self.posX, self.posY, self.cibleX, self.cibleY)
-    #         if dist <= self.vitesse:
-    #             self.checkCollision()
-    #
-    #     else: self.checkCollision()
-    #
-    # def checkCollision(self):
-    #     zone_collision = (self.posX - self.rayon) - self.etenduCollision, (self.posY - self.rayon) - self.etenduCollision, (self.posX + self.rayon) + self.etenduCollision, (self.posY + self.rayon) + self.etenduCollision
-    #
-    #     # implementer une facon pour voir si creep est a l'interieur du range de la tour
-    #     for creep in self.parent.creepActif:
-    #         if self.niveauTour == 1:
-    #             creep[0].dommageOverTime.append(self.dommage_niveau()) #faire en dommage normal vu que manque de temps pour damageOverTime
-    #
-    #         elif self.niveauTour == 2 or self.niveauTour == 3:
-    #             creep[0].dommages.append(self.dommage_niveau())
 
 
 
