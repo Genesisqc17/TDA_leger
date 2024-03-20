@@ -34,6 +34,7 @@ class Vue():
         self.info_score = StringVar()
         self.info_score.set("Score: ")
         self.root.title("Super Tower Defence 64")
+        #self.root.geometry(f"{self.modele.tailleMaxX}x{int(self.modele.tailleMaxY)}")
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
         self.police_bouton = tkinter.font.Font(family="Terminal", size=12, weight="normal")
         self.typeTour = None
@@ -242,6 +243,10 @@ class Vue():
         self.info_score = Label(self.gameover_frame, textvariable=self.info_score, font=self.police_label)
         self.recommencer = Button(self.gameover_frame, text="Recommencer", command=self.afficher_parent,
                                   font=self.police_bouton)
+
+        self.titre_gameover.pack()
+        self.info_score.pack()
+        self.recommencer.pack()
 
         return self.gameover_frame
 

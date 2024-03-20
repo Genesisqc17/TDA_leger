@@ -15,6 +15,8 @@ class Modele():
         self.tailleY = self.nbLignesJeu * self.variableTaille
         self.box_tailleX = self.tailleX
         self.box_tailleY = self.tailleY/3
+        self.tailleMaxX = self.tailleX
+        self.tailleMaxY = self.tailleY + self.box_tailleY
         self.vie = 20
         self.argent = 10
         self.niveauVague = 0
