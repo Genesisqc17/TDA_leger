@@ -16,6 +16,8 @@ class Modele():
         self.tailleY = self.nbLignesJeu * self.variableTaille
         self.box_tailleX = self.tailleX
         self.box_tailleY = self.tailleY/3
+        self.tailleMaxX = self.tailleX
+        self.tailleMaxY = self.tailleY + self.box_tailleY
         self.vie = 20
         self.argent = 10
         self.niveauVague = 0
@@ -171,9 +173,9 @@ class Modele():
         pass
 
     def creerChateau(self):
-        pos1 = Chateau(self, 29, 15, 29, 14, "blue")
-        pos2 = Chateau(self, 30, 15, 30, 14, "blue")
-        pos3 = Chateau(self, 28, 13, 31, 12, "blue")
+        pos1 = Chateau(self, 29, 15, 29, 14)
+        pos2 = Chateau(self, 30, 15, 30, 14)
+        pos3 = Chateau(self, 28, 13, 31, 12)
 
         self.positionsChateau.append(pos1)
         self.positionsChateau.append(pos2)

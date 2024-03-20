@@ -28,7 +28,7 @@ class Controleur():
             self.vue.root.after(50, self.boucle_jeu)
         else:
             self.modele.gameOver()
-            self.vue.afficher_intro()
+            self.vue.afficher_gameover()
 
 
 if (__name__ == "__main__"):
