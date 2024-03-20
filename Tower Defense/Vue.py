@@ -293,6 +293,17 @@ class Vue():
                                                  i.posX + i.rayon, i.posY + i.rayon,
                                                  fill="gold", tags="proj")
 
+        for i in self.modele.positionsChateau:
+            self.canevasGame.create_rectangle(i.posX, i.posY,
+                                             i.posX2, i.posY2,
+                                             width=self.modele.variableTaille + 6,
+                                             fill=i.couleur, tags=("Chateau", "NoOverlap"))
+
+
+
+
+
+
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
         return overlapping_items

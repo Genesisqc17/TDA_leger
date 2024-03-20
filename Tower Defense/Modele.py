@@ -1,6 +1,7 @@
 from Route import Route
 from creep import Creep
 from Tour import Tour
+from Chateau import Chateau
 import time
 
 class Modele():
@@ -172,14 +173,10 @@ class Modele():
         pass
 
     def creerChateau(self):
-        ## posX1
-        ## posY1
-        ## posX2
-        ## posY2
-        ## posX3
-        ## posY3
-        ## posX4
-        ## posY4
-        ## posX5
-        ## posY5
-        pass
+        pos1 = Chateau(self, 29, 15, 29, 14, "blue")
+        pos2 = Chateau(self, 30, 15, 30, 14, "blue")
+        pos3 = Chateau(self, 28, 13, 31, 12, "blue")
+
+        self.positionsChateau.append(pos1)
+        self.positionsChateau.append(pos2)
+        self.positionsChateau.append(pos3)
