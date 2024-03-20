@@ -6,7 +6,7 @@ class Creep():
         self.posX = posX
         self.posY = posY
         self.vivant = True
-        self.vie = 10  * self.parent.niveauVague
+        self.vie = 20  * self.parent.niveauVague
         self.cibleX = None
         self.cibleY = None
         self.angle = None

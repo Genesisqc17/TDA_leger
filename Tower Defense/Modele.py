@@ -89,8 +89,6 @@ class Modele():
             self.creepInactif = self.creepInactif[:-1]
             self.intervalSpawnCreep += 5
 
-            print(elapsed_seconds)
-
 
         ## Trouver cible de tour
         if len(self.creepActif) != 0:
