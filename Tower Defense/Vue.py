@@ -34,6 +34,7 @@ class Vue():
         self.info_score = StringVar()
         self.info_score.set("Score: ")
         self.root.title("Super Tower Defence 64")
+        #self.root.geometry(f"{self.modele.tailleMaxX}x{int(self.modele.tailleMaxY)}")
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
         self.police_bouton = tkinter.font.Font(family="Terminal", size=12, weight="normal")
         self.typeTour = None
@@ -243,6 +244,10 @@ class Vue():
         self.recommencer = Button(self.gameover_frame, text="Recommencer", command=self.afficher_parent,
                                   font=self.police_bouton)
 
+        self.titre_gameover.pack()
+        self.info_score.pack()
+        self.recommencer.pack()
+
         return self.gameover_frame
 
     def afficher_all(self):
@@ -274,19 +279,26 @@ class Vue():
                                              fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap", "Poison"))
 
         for i in self.modele.projActif:
-            for j in self.modele.tours:
-                if j.type == "tProjectile":
-                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
-                                                 i.posX + i.rayon, i.posY + i.rayon,
-                                                 fill="gold", tags="proj")
-                if j.type == "tEclair":
-                    if j.cibleX and j.cibleY is not None:
-                        self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
-                                                 fill="deep sky blue", tags="proj", width=5)
-                if j.type == "tPoison":
-                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
-                                                 i.posX + i.rayon, i.posY + i.rayon,
-                                                 fill="gold", tags="proj")
+            if i.parent.type == "tProjectile":
+                self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                             i.posX + i.rayon, i.posY + i.rayon,
+                                             fill="gold", tags="proj")
+            if i.parent.type == "tEclair":
+                if i.cibleX and i.cibleY is not None:
+                    self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
+                                             fill="deep sky blue", tags="proj", width=5)
+            if i.parent.type == "tPoison":
+                self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                             i.posX + i.rayon, i.posY + i.rayon,
+                                             fill="gold", tags="proj")
+
+        for i in self.modele.positionsChateau:
+            self.canevasGame.create_rectangle(i.posX, i.posY,
+                                             i.posX2, i.posY2,
+                                             width=self.modele.variableTaille + 6,
+                                             fill="royal blue", tags=("Chateau", "NoOverlap"))
+
+
 
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)

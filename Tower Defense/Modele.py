@@ -1,6 +1,7 @@
 from Route import Route
 from creep import Creep
 from Tour import Tour
+from Chateau import Chateau
 import time
 
 class Modele():
@@ -15,6 +16,8 @@ class Modele():
         self.tailleY = self.nbLignesJeu * self.variableTaille
         self.box_tailleX = self.tailleX
         self.box_tailleY = self.tailleY/3
+        self.tailleMaxX = self.tailleX
+        self.tailleMaxY = self.tailleY + self.box_tailleY
         self.vie = 20
         self.argent = 10
         self.niveauVague = 0
@@ -168,14 +171,10 @@ class Modele():
         pass
 
     def creerChateau(self):
-        ## posX1
-        ## posY1
-        ## posX2
-        ## posY2
-        ## posX3
-        ## posY3
-        ## posX4
-        ## posY4
-        ## posX5
-        ## posY5
-        pass
+        pos1 = Chateau(self, 29, 15, 29, 14)
+        pos2 = Chateau(self, 30, 15, 30, 14)
+        pos3 = Chateau(self, 28, 13, 31, 12)
+
+        self.positionsChateau.append(pos1)
+        self.positionsChateau.append(pos2)
+        self.positionsChateau.append(pos3)

@@ -1,6 +1,7 @@
 import math
 from Projectile import Projectile
 from Eclair import Eclair
+from PoisonProjectile import PoisonProjectile as Poison
 class Tour():
     def __init__(self, parent, posX, posY, type, id):
         self.parent = parent
@@ -51,6 +52,7 @@ class Tour():
          ##       if self.parent.timeTotal % self.nextShotTime == 0:
            ##         pass
             ##pass
+
 
     def trouverCible(self):
         for i in reversed(self.parent.creepActif):
