@@ -15,40 +15,43 @@ class Tour():
         self.cout = None
         self.etendu = self.parent.variableTaille * 3
         self.couleur = None
-        self.frequenceTirs = None
+        self.nextShotTime = self.parent.timeTotal
         self.initDifTour()
+        self.tick = 0
 
     def initDifTour(self):
         if self.type == "tProjectile":
-            self.cout = 5
-            self.frequenceTirs = 3
+            self.cout = 3
             self.couleur = "RED"
 
         elif self.type == "tEclair":
             self.cout = 2
-            self.frequenceTirs = 1
             self.couleur = "BLUE"
 
         elif self.type == "tPoison":
-            self.cout = 3
-            self.frequenceTirs = 2
+            self.cout = 5
+            self.nextShotTime = 2
             self.couleur = "GREEN"
 
     def tirer(self):
         self.trouverCible()
-        print(self.parent.timeTotal)
-        if self.type == "tProjectile" and int(self.parent.timeTotal) % self.frequenceTirs == 0:
-           self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
-           print("tirer proj")
-        elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
-           self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
-           print("tirer eclair")
-        elif self.type == "tPoison" and self.parent.timeTotal % self.frequenceTirs == 0:
-            ## self.parent.projActif.append(Poison)
-            pass
+        if self.type == "tProjectile":
+            if self.tick >= self.nextShotTime:
+                self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
+                self.nextShotTime = self.tick + 15
+
+        elif self.type == "tEclair":
+            if self.parent.timeTotal % self.nextShotTime == 0:
+                self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
+
+        self.tick += 1
+       ## elif self.type == "tPoison":
+         ##       if self.parent.timeTotal % self.nextShotTime == 0:
+           ##         pass
+            ##pass
 
     def trouverCible(self):
-        for i in self.parent.creepActif:
+        for i in reversed(self.parent.creepActif):
             if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
