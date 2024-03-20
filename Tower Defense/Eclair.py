@@ -18,7 +18,7 @@ class Eclair:
 
     def dommage_niveau(self):
         if self.niveauTour == 1:
-            self.dommage = 0.02
+            self.dommage = 0.008
 
         elif self.niveauTour == 2:
             self.dommage = 0.4
@@ -29,7 +29,6 @@ class Eclair:
     def mouvement(self):
         if not self.cible or self.cible.vie <= 0:
             self.trouver_cible()
-            print("cherchecible")
         if self.cible:
             self.posX = self.cible.posX
             self.cibleX = self.posX
@@ -46,7 +45,6 @@ class Eclair:
             distance = hp.calcDistance(self.posX, self.posY, creep.posX, creep.posY)
             if distance <= self.etendu:
                 self.cible = creep
-                print("cibletrouver")
                 break
 
 
