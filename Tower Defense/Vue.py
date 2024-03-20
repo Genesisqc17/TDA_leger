@@ -279,25 +279,24 @@ class Vue():
                                              fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap", "Poison"))
 
         for i in self.modele.projActif:
-            for j in self.modele.tours:
-                if j.type == "tProjectile":
-                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
-                                                 i.posX + i.rayon, i.posY + i.rayon,
-                                                 fill="gold", tags="proj")
-                if j.type == "tEclair":
-                    if j.cibleX and j.cibleY is not None:
-                        self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
-                                                 fill="deep sky blue", tags="proj", width=5)
-                if j.type == "tPoison":
-                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
-                                                 i.posX + i.rayon, i.posY + i.rayon,
-                                                 fill="gold", tags="proj")
+            if i.parent.type == "tProjectile":
+                self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                             i.posX + i.rayon, i.posY + i.rayon,
+                                             fill="gold", tags="proj")
+            if i.parent.type == "tEclair":
+                if i.cibleX and i.cibleY is not None:
+                    self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
+                                             fill="deep sky blue", tags="proj", width=5)
+            if i.parent.type == "tPoison":
+                self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                             i.posX + i.rayon, i.posY + i.rayon,
+                                             fill="gold", tags="proj")
 
         for i in self.modele.positionsChateau:
             self.canevasGame.create_rectangle(i.posX, i.posY,
                                              i.posX2, i.posY2,
                                              width=self.modele.variableTaille + 6,
-                                             fill=i.couleur, tags=("Chateau", "NoOverlap"))
+                                             fill="royal blue", tags=("Chateau", "NoOverlap"))
 
 
 
