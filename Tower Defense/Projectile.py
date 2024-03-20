@@ -13,7 +13,7 @@ class Projectile:
         self.dommage = None
         self.rayon = 4
         self.angle = None
-        self.etenduCollision = 1
+        self.etenduCollision = 0
         self.calculDommageVitesse()
         self.trouver_cible()
 
@@ -32,17 +32,30 @@ class Projectile:
         self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
 
     def checkCollision(self):
+        index = 0
+        tab = []
         zone_collision = (self.posX - self.rayon) - self.etenduCollision, (self.posY - self.rayon) - self.etenduCollision, (self.posX + self.rayon) + self.etenduCollision, (self.posY + self.rayon) + self.etenduCollision
         for creep in self.parent.parent.creepActif:
             zone_creep = (creep.collisionX1,creep.collisionY1,creep.collisionX2,creep.collisionY2)
-
-            if not (zone_collision[2] < zone_creep[0] or
-                    zone_collision[0] > zone_creep[2] or
-                    zone_collision[3] < zone_creep[1] or
-                    zone_collision[1] > zone_creep[3]):
-                creep.dommages.append(self.dommage)
-
+            if (zone_collision[2] >= zone_creep[0] and
+                    zone_collision[0] <= zone_creep[2] and
+                    zone_collision[3] >= zone_creep[1] and
+                    zone_collision[1] <= zone_creep[3]):
+                    tab.append(index)
+            index += 1
         self.collided = True
+
+        for i in tab:
+            print(i)
+            self.parent.parent.creepActif[i].dommages.append(self.dommage)
+            ##if not (zone_collision[2] < zone_creep[0] or
+            ##        zone_collision[0] > zone_creep[2] or
+            ##        zone_collision[3] < zone_creep[1] or
+            ##        zone_collision[1] > zone_creep[3]):
+            ##    creep.dommages.append(self.dommage)
+            ##    break
+
+
 
 
 

@@ -38,13 +38,15 @@ class Tour():
         if self.type == "tProjectile":
             if self.tick >= self.nextShotTime:
                 self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
-                self.nextShotTime = self.tick + 15
+                self.nextShotTime = self.tick + 35
 
         elif self.type == "tEclair":
             if self.parent.timeTotal % self.nextShotTime == 0:
                 self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
 
         self.tick += 1
+        self.cibleX = None
+        self.cibleY = None
        ## elif self.type == "tPoison":
          ##       if self.parent.timeTotal % self.nextShotTime == 0:
            ##         pass
