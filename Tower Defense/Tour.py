@@ -22,17 +22,17 @@ class Tour():
         if self.type == "tProjectile":
             self.cout = 5
             self.frequenceTirs = 3
-            self.couleur = "goldenrod"
+            self.couleur = "RED"
 
         elif self.type == "tEclair":
             self.cout = 2
             self.frequenceTirs = 1
-            self.couleur = "midnight blue"
+            self.couleur = "BLUE"
 
         elif self.type == "tPoison":
             self.cout = 3
             self.frequenceTirs = 2
-            self.couleur = "forest green"
+            self.couleur = "GREEN"
 
     def tirer(self):
         self.trouverCible()
@@ -42,6 +42,7 @@ class Tour():
            print("tirer proj")
         elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
            self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
+           print("tirer eclair")
         elif self.type == "tPoison" and self.parent.timeTotal % self.frequenceTirs == 0:
             ## self.parent.projActif.append(Poison)
             pass
@@ -51,24 +52,6 @@ class Tour():
             if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
-
-
-        """min_distance = float('inf')  # Initialize with infinity
-        closest_creep = None
-
-        for i in self.parent.creepActif:
-            distance = math.sqrt((i.posX - self.posX) ** 2 + (i.posY - self.posY) ** 2)
-            if distance < min_distance:
-                min_distance = distance
-                closest_creep = i
-
-        if closest_creep:
-            # Predict the future position by adding a fraction of the velocity to the current position
-            future_posX = closest_creep.posX + closest_creep.vitesseX * 0.5  # Adjust 0.1 as needed
-            future_posY = closest_creep.posY + closest_creep.vitesseY * 0.5  # Adjust 0.1 as needed
-
-            self.cibleX = future_posX
-            self.cibleY = future_posY"""
 
 
 
