@@ -34,14 +34,11 @@ class Vue():
         self.info_score = StringVar()
         self.info_score.set("Score: ")
         self.root.title("Super Tower Defence 64")
+        self.upgrade_frame = None
         #self.root.geometry(f"{self.modele.tailleMaxX}x{int(self.modele.tailleMaxY)}")
         self.police_label = tkinter.font.Font(family="Terminal", size=14, weight="normal")
         self.police_bouton = tkinter.font.Font(family="Terminal", size=12, weight="normal")
         self.typeTour = None
-        """self.tour_frame_active = None
-        self.tour_frames = {"Achat": self.creer_tour_frame("Achat"),
-                            "Upgrade": self.creer_tour_frame("Upgrade")}
-                            """
         self.mes_frames = {"intro": self.creer_intro_frame(),
                            "parent": self.creer_parent_frame(),
                            "gameover": self.creer_game_over()}
@@ -56,14 +53,6 @@ class Vue():
         self.frame_active = self.mes_frames[cle]
         self.frame_active.pack()
 
-    """
-    def changer_tour_frame(self, frame_name):
-        if self.tour_frame_active:
-            self.tour_frame_active.pack_forget()  # Forget the currently chosen tour frame
-        self.chosen_tour_frame = self.tour_frames[frame_name]  # Set the new chosen tour frame
-        self.chosen_tour_frame.pack(side=LEFT)
-    """
-
     def commencer_partie(self):
         self.afficher_parent()
         self.parent.initialiser_jeu()
@@ -73,6 +62,10 @@ class Vue():
 
     def afficher_parent(self):
         self.changer_frame("parent")
+
+    def afficher_upgrade(self):
+        self.creer_upgrade_frame()
+        self.upgrade_frame.pack(pady=10)
 
     def afficher_gameover(self):
         self.changer_frame("gameover")
@@ -150,48 +143,23 @@ class Vue():
 
         return self.parent_frame
 
-    """def creer_tour_frame(self, frame_name):
-        # Create a tour frame with specific content based on frame_name
-        if frame_name == "Achat":
-            tour_frame = Frame(self.menu_frame)
-            tour_frame.pack(side=LEFT, padx=150, pady=10)
+    def creer_upgrade_frame(self):
+        if self.upgrade_frame is not None:
+            self.upgrade_frame.pack_forget()
 
-            # Boutons pour acheter tours
-            proj_bouton = Button(tour_frame, text="Tour projectile 3$", command=self.acheter_tour_proj
-                                      , font=self.police_bouton)
-            eclair_bouton = Button(tour_frame, text="Tour éclair 2$", command=self.acheter_tour_eclair
-                                        , font=self.police_bouton)
-            poison_bouton = Button(tour_frame, text="Tour poison 5$", command=self.acheter_tour_poison
-                                        , font=self.police_bouton)
-            poison_bouton.pack()
-            eclair_bouton.pack()
-            proj_bouton.pack()
-        elif frame_name == "Upgrade":
-            tour_frame = Frame(self.menu_frame)
-            tour_frame.pack(side=LEFT,padx=150, pady=10)
-            info_upgrade_frame = Frame(tour_frame)
-            cout_upgrade = Label(info_upgrade_frame, textvariable=self.cout_upgrade_text
-                                      , font=self.police_label)
-            upgrade_force = Label(info_upgrade_frame, textvariable=self.force_upgrade_text
-                                       , font=self.police_label)
-            upgrade_etendu = Label(info_upgrade_frame, textvariable=self.etendu_upgrade_text
-                                        , font=self.police_label)
-
-            # Bouton pour améliorer une tour
-            upgrade_bouton = Button(tour_frame, text="Améliorer", command=self.ameliorer_tour
-                                         , font=self.police_bouton)
-
-            # Frame pour l'info d'une tour
-            info_tour = Frame(tour_frame)
-            nom_tour = Label(info_tour, textvariable=self.nom_tour_text
-                                  , font=self.police_label)
-            force_tour = Label(info_tour, textvariable=self.force_tour_text
-                                    , font=self.police_label)
-            etendu_tour = Label(info_tour, textvariable=self.etendu_tour_text
-                                     , font=self.police_label)
-
-
-        return tour_frame"""
+        self.upgrade_frame = Frame(self.root, highlightbackground="black", highlightthickness=1)
+        self.force_upgrade = Label(self.upgrade_frame, textvariable=self.force_upgrade_text,
+                                    font=self.police_label)
+        self.etendu_upgrade = Label(self.upgrade_frame, textvariable=self.etendu_upgrade_text, font=self.police_label)
+        self.nom_tour = Label(self.upgrade_frame, textvariable=self.nom_tour_text, font=self.police_label)
+        self.upgrade_bouton = Button(self.upgrade_frame, textvariable=self.cout_upgrade_text, command=self.ameliorer_tour,
+                                     font=self.police_bouton)
+        self.upgrade_quit = Button(self.upgrade_frame, text="X", bg="red", font=self.police_bouton, command=self.quitter_upgrade)
+        self.upgrade_quit.pack()
+        self.nom_tour.pack(side=LEFT)
+        self.force_upgrade.pack(side=LEFT, padx=50, pady=10)
+        self.etendu_upgrade.pack(side=LEFT, padx=50)
+        self.upgrade_bouton.pack()
 
     def acheter_tour_proj(self):
         self.acheter_tour()
@@ -204,6 +172,9 @@ class Vue():
     def acheter_tour_poison(self):
         self.acheter_tour()
         self.typeTour = "tPoison"
+
+    def quitter_upgrade(self):
+        self.upgrade_frame.pack_forget()
 
     def checkOverlap(self, event):
         overlaps = self.find_overlapping(self.canevasGame, event.x - self.modele.variableTaille, event.y - self.modele.variableTaille, event.x + self.modele.variableTaille, event.y + self.modele.variableTaille)
@@ -230,12 +201,13 @@ class Vue():
             for tag in tags:
                 if tag.startswith("tour"):
                     tour_id = int(tag[4:])
-                    self.update_tour_info(tour_id)
-                    self.changer_tour_frame("Upgrade")
                     self.id_tour_selectionne = tour_id
+                    self.update_tour_info(tour_id)
+                    self.afficher_upgrade()
 
     def ameliorer_tour(self):
         self.parent.ameliorer_tour(self.id_tour_selectionne)
+        self.update_tour_info(self.id_tour_selectionne)
 
     def creer_game_over(self):
         self.gameover_frame = Frame(self.root)
@@ -285,7 +257,7 @@ class Vue():
                                              fill="gold", tags="proj")
             if i.parent.type == "tEclair":
                 if i.cibleX and i.cibleY is not None:
-                    self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
+                    self.canevasGame.create_line(i.parent.posX, i.parent.posY, i.cibleX, i.cibleY,
                                              fill="deep sky blue", tags="proj", width=5)
             if i.parent.type == "tPoison":
                 self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
@@ -311,13 +283,23 @@ class Vue():
         self.qte_argent.set("Argent: " + str(self.modele.argent) + "$")
 
     def update_tour_info(self, id_tour):
-        self.cout_upgrade_text.set("Coût: " + str(self.modele.cost_tour))
-        self.force_upgrade_text.set("Force: " + str(self.modele.force_upgrade))
-        self.etendu_upgrade_text.set("Étendu: " + str(self.modele.etendu_upgrade))
-        self.nom_tour_text.set("Tour: " + str(self.modele.type_tour))
-        self.force_tour_text.set("Force: " + str(self.modele.force_tour))
-        self.etendu_tour_text.set("Étendu: " + str(self.modele.etendu_tour))
-        self.force_tour_text.set("Force: " + str(self.modele.force_tour))
+        nom_tour = ""
+        for i in self.modele.tours:
+            if i.type == "tProjectile":
+                nom_tour = "Tour de projectiles"
+                self.cout_upgrade_text.set("Coût: " + str(self.modele.tours[id_tour].cout * 2))
+            elif i.type == "tEclair":
+                nom_tour = "Tour d'éclairs"
+                self.cout_upgrade_text.set("Coût: " + str(self.modele.tours[id_tour].cout * 1.5))
+            elif i.type == "tPoison":
+                nom_tour = "Tour de poison"
+                self.cout_upgrade_text.set("Coût: " + str(self.modele.tours[id_tour].cout * 1.75))
+
+            self.force_upgrade_text.set("Force: " + str(self.modele.tours[id_tour].niveauForce + 1))
+            self.etendu_upgrade_text.set("Étendu: " + str(self.modele.tours[id_tour].etendu + 5))
+            self.nom_tour_text.set("Tour: " + nom_tour)
+            self.force_tour_text.set("Force: " + str(self.modele.tours[id_tour].niveauForce))
+            self.etendu_tour_text.set("Étendu: " + str(self.modele.tours[id_tour].etendu))
 
 
 

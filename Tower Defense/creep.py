@@ -38,19 +38,6 @@ class Creep():
                 self.cibleX = self.parent.routes[self.currentRoute].posX2
                 self.cibleY = self.parent.routes[self.currentRoute].posY2
 
-            '''
-            if self.parent.routes[self.currentRoute].posX2 < self.posX:
-                self.vitesseX = -1
-            elif self.parent.routes[self.currentRoute].posX2 > self.posX:
-                self.vitesseX = 1
-
-            if self.parent.routes[self.currentRoute].posY2 < self.posY:
-                self.vitesseY = -1
-            elif self.parent.routes[self.currentRoute].posY2 > self.posY:
-                self.vitesseY = 1
-            '''
-
-
             if self.currentRoute == 1:
                 self.vitesseX = 2
                 self.vitesseY = 0
@@ -93,13 +80,6 @@ class Creep():
         for dommage in self.dommages:
             self.vie = self.vie - dommage
             self.dommages.remove(dommage)
-
-        ## for i in self.dommageOverTime:
-        ##    for j in self.dommageOverTime:
-        ##        self.vie = self.vie
-        ##        dommageOver[0][1] -= 1
-        ##        if(dommageOver[0][1]<=0):
-        ##            self.dommageOverTime.remove(dommageOver[0])
 
         if (self.vie <= 0):
             self.CreepMort()

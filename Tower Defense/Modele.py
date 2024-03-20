@@ -114,6 +114,7 @@ class Modele():
         if len(self.projActif) != 0:
             collidedProjectiles = []
             for i in self.projActif:
+
                 if i.collided == True:
                     collidedProjectiles.append(i)
 

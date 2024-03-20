@@ -37,14 +37,16 @@ class Tour():
 
     def tirer(self):
         self.trouverCible()
+
         if self.type == "tProjectile":
             if self.tick >= self.nextShotTime:
                 self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce, self.cible))
                 self.nextShotTime = self.tick + 35
 
         elif self.type == "tEclair":
-            if self.parent.timeTotal % self.nextShotTime == 0:
+            if self.tick >= self.nextShotTime:
                 self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
+
 
         self.tick += 1
         self.cibleX = None
@@ -64,19 +66,22 @@ class Tour():
 
 
 
-    def ameliorer(self, prix):
+    def ameliorer(self):
         if self.parent.argent > self.cout and self.niveauForce < 3:
 
             self.niveauForce = self.niveauForce + 1
 
             if self.type == "tProjectile":
                 self.cout = self.cout * 2
+                self.etendu += 25
 
             elif self.type == "tEclair":
                 self.cout = self.cout * 1.5
+                self.etendu += 20
 
             elif self.type == "tPoison":
                 self.cout = self.cout * 1.75
+                self.etendu += 10
 
     def idTourSelect(self):
         return self.id
