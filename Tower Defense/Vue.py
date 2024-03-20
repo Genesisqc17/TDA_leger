@@ -117,8 +117,8 @@ class Vue():
         self.timer = Label(self.vc_frame, textvariable=self.chrono_text
                            , font=self.police_label)
         self.timer.pack()
-        self.niv_vague.pack()
-        self.vc_frame.pack(side=LEFT, padx=150, pady=10)
+        self.niv_vague.pack(padx=100)
+        self.vc_frame.pack(side=LEFT, padx=100, pady=10)
 
         # Frame pour acheter une tour
         self.tour_frame_choisi = "Achat"
@@ -246,7 +246,7 @@ class Vue():
 
         return self.gameover_frame
 
-    def afficher_all(self):
+        def afficher_all(self):
         self.canevasGame.delete("all")
 
         for i in self.modele.routes:
@@ -261,14 +261,33 @@ class Vue():
                                          fill="PaleGreen3", tags="creep")
 
         for i in self.modele.tours:
-            self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
-                                         i.posX + i.rayon,i.posY + i.rayon,
-                                         fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap"))
+            if i.type == "tProjectile":
+                self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
+                                             i.posX + i.rayon,i.posY + i.rayon,
+                                             fill="slate gray", tags=(f"tProjectile{str(i.id)}", "NoOverlap"))
+            elif i.type == "tEclair":
+                self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
+                                             i.posX + i.rayon,i.posY + i.rayon,
+                                             fill="blue2", tags=(f"tEclair{str(i.id)}", "NoOverlap"))
+            if i.type == "tPoison":
+                self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
+                                             i.posX + i.rayon,i.posY + i.rayon,
+                                             fill="green yellow", tags=(f"tPoison{str(i.id)}", "NoOverlap"))
 
         for i in self.modele.projActif:
-            self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
-                                         i.posX + i.rayon, i.posY + i.rayon,
-                                         fill="gold", tags="proj")
+            for j in self.modele.tours:
+                if j.type == "tProjectile":
+                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                                 i.posX + i.rayon, i.posY + i.rayon,
+                                                 fill="gold", tags="proj")
+                if j.type == "tEclair":
+                    if j.cibleX and j.cibleY is not None:
+                        self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
+                                                 fill="deep sky blue", tags="proj", width=5)
+                if j.type == "tPoison":
+                    self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,
+                                                 i.posX + i.rayon, i.posY + i.rayon,
+                                                 fill="gold", tags="proj")
 
 
     def find_overlapping(self,canvas, x1, y1, x2, y2):
@@ -278,7 +297,7 @@ class Vue():
 
     def update_text(self):
         self.niv_wave_text.set("Vague: " + str(self.modele.niveauVague))
-        # self.chrono_text.set("Chrono: " + str(self.modele.chrono))
+        self.chrono_text.set("Chrono: " + str(round(self.modele.timeTotal, 2)))
         self.nb_vies.set("Vie: " + str(self.modele.vie))
         self.qte_argent.set("Argent: " + str(self.modele.argent) + "$")
 
