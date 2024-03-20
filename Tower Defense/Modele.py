@@ -34,6 +34,17 @@ class Modele():
         self.timeTotal = 0
         self.intervalSpawnCreep = 1
 
+    def gameOver(self):
+        self.vie = 20
+        self.argent = 10
+        self.niveauVague = 0
+        self.creepActif = []
+        self.creepInactif = []
+        self.projActif = []
+        self.tours = []
+        self.nextIdTour = 0
+
+
     def ajouter_tour(self, posX, posY, type):
         nouvelleTour = Tour(self,posX,posY,type,self.nextIdTour)
         if(self.argent >= nouvelleTour.cout):
@@ -66,6 +77,10 @@ class Modele():
         self.timeFin = time.time()
         self.timeTotal = self.timeFin - self.timeDebut
         elapsed_seconds = int (self.timeTotal)
+
+        if len(self.creepInactif) == 0:
+            if len(self.creepActif) == 0:
+                self.fin_vague()
 
         if self.timeTotal >= self.intervalSpawnCreep and len(self.creepInactif) != 0:
             self.creepActif.append(self.creepInactif[-1])
@@ -116,6 +131,7 @@ class Modele():
         if len(self.creepActif) != 0:
             for i in self.creepActif:
                 i.CreepVie()
+
     def fin_vague(self):
         self.projActif.clear()
         self.argent = self.argent + self.niveauVague * 50

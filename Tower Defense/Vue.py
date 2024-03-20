@@ -263,15 +263,15 @@ class Vue():
             if i.type == "tProjectile":
                 self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
                                              i.posX + i.rayon,i.posY + i.rayon,
-                                             fill="slate gray", tags=(f"tProjectile{str(i.id)}", "NoOverlap"))
+                                             fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap", "Projectile"))
             elif i.type == "tEclair":
                 self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
                                              i.posX + i.rayon,i.posY + i.rayon,
-                                             fill="blue2", tags=(f"tEclair{str(i.id)}", "NoOverlap"))
+                                             fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap", "Eclair"))
             if i.type == "tPoison":
                 self.canevasGame.create_oval(i.posX - i.rayon,i.posY - i.rayon,
                                              i.posX + i.rayon,i.posY + i.rayon,
-                                             fill="green yellow", tags=(f"tPoison{str(i.id)}", "NoOverlap"))
+                                             fill=i.couleur, tags=(f"tour{str(i.id)}", "NoOverlap", "Poison"))
 
         for i in self.modele.projActif:
             for j in self.modele.tours:
