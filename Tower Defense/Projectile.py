@@ -1,62 +1,43 @@
+import math
+
 from helper import Helper as hp
 
 class Projectile:
-    def __init__(self, parent, posX, posY, cibleX, cibleY, niveauTour):
+    def __init__(self, parent, posX, posY, cibleX, cibleY, niveauTour, cible):
         self.parent = parent
         self.posX = posX
         self.posY = posY
         self.cibleX = cibleX
         self.cibleY = cibleY
+        self.cible = cible
         self.collided = False
         self.niveauTour = niveauTour
         self.vitesse = None
         self.dommage = None
         self.rayon = 4
         self.angle = None
-        self.etenduCollision = 0
+        self.etenduCollision = 20
         self.calculDommageVitesse()
         self.trouver_cible()
 
     def calculDommageVitesse(self):
         if self.niveauTour == 1:
             self.dommage = 3
-            self.vitesse = 8
+            self.vitesse = 15
         elif self.niveauTour == 2:
-            self.dommage = 1
-            self.vitesse = 10
+            self.dommage = 4
+            self.vitesse = 20
         else:
             self.dommage = 5
-            self.vitesse = 6
+            self.vitesse = 40
 
     def trouver_cible(self):
         self.angle = hp.calcAngle(self.posX, self.posY, self.cibleX, self.cibleY)
 
     def checkCollision(self):
-        index = 0
-        tab = []
-        zone_collision = (self.posX - self.rayon) - self.etenduCollision, (self.posY - self.rayon) - self.etenduCollision, (self.posX + self.rayon) + self.etenduCollision, (self.posY + self.rayon) + self.etenduCollision
-        for creep in self.parent.parent.creepActif:
-            zone_creep = (creep.collisionX1,creep.collisionY1,creep.collisionX2,creep.collisionY2)
-            if (zone_collision[2] >= zone_creep[0] and
-                    zone_collision[0] <= zone_creep[2] and
-                    zone_collision[3] >= zone_creep[1] and
-                    zone_collision[1] <= zone_creep[3]):
-                    tab.append(index)
-            index += 1
         self.collided = True
-
-        for i in tab:
-            print(i)
-            self.parent.parent.creepActif[i].dommages.append(self.dommage)
-            ##if not (zone_collision[2] < zone_creep[0] or
-            ##        zone_collision[0] > zone_creep[2] or
-            ##        zone_collision[3] < zone_creep[1] or
-            ##        zone_collision[1] > zone_creep[3]):
-            ##    creep.dommages.append(self.dommage)
-            ##    break
-
-
-
+        if math.sqrt(math.pow((self.cible.posX - self.posX), 2) + math.pow((self.cible.posY-self.posY), 2)) <= self.etenduCollision:
+            self.cible.dommages.append(self.dommage)
 
 
     def mouvement(self):

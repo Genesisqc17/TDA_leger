@@ -6,12 +6,12 @@ class Creep():
         self.posX = posX
         self.posY = posY
         self.vivant = True
-        self.vie = 20  * self.parent.niveauVague
+        self.vie = 20 * self.parent.niveauVague * 0.5
         self.cibleX = None
         self.cibleY = None
         self.angle = None
         self.vitesseX = 0
-        self.vitesseY = 10
+        self.vitesseY = 2
         self.rayon = 6
         self.collisionX1 = posX - self.rayon
         self.collisionY1 = posY - self.rayon
@@ -52,25 +52,25 @@ class Creep():
 
 
             if self.currentRoute == 1:
-                self.vitesseX = 10
+                self.vitesseX = 2
                 self.vitesseY = 0
             elif self.currentRoute == 2:
                 self.vitesseX = 0
-                self.vitesseY = -10
+                self.vitesseY = -2
             elif self.currentRoute == 3:
-                self.vitesseX = 10
+                self.vitesseX = 2
                 self.vitesseY = 0
             elif self.currentRoute == 4:
                 self.vitesseX = 0
-                self.vitesseY = 10
+                self.vitesseY = 2
             elif self.currentRoute == 5:
-                self.vitesseX = -10
+                self.vitesseX = -2
                 self.vitesseY = 0
             elif self.currentRoute == 6:
                 self.vitesseX = 0
-                self.vitesseY = 10
+                self.vitesseY = 2
             elif self.currentRoute == 7:
-                self.vitesseX = 10
+                self.vitesseX = 2
                 self.vitesseY = 0
 
         else:

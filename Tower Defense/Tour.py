@@ -19,6 +19,7 @@ class Tour():
         self.nextShotTime = self.parent.timeTotal
         self.initDifTour()
         self.tick = 0
+        self.cible = None
 
     def initDifTour(self):
         if self.type == "tProjectile":
@@ -38,7 +39,7 @@ class Tour():
         self.trouverCible()
         if self.type == "tProjectile":
             if self.tick >= self.nextShotTime:
-                self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
+                self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce, self.cible))
                 self.nextShotTime = self.tick + 35
 
         elif self.type == "tEclair":
@@ -59,6 +60,7 @@ class Tour():
             if math.sqrt(math.pow((i.posX - self.posX), 2) + math.pow((i.posY-self.posY), 2)) < self.etendu:
                 self.cibleX = i.posX
                 self.cibleY = i.posY
+                self.cible = i
 
 
 
