@@ -77,7 +77,7 @@ class Modele():
         self.timeTotal = self.timeFin - self.timeDebut
         elapsed_seconds = int (self.timeTotal)
 
-        if len(self.creepInactif) ==0:
+        if len(self.creepInactif) == 0:
             if len(self.creepActif) == 0:
                 self.fin_vague()
 

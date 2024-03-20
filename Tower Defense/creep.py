@@ -11,7 +11,7 @@ class Creep():
         self.cibleY = None
         self.angle = None
         self.vitesseX = 0
-        self.vitesseY = 5
+        self.vitesseY = 1
         self.rayon = 6
         self.collisionX1 = posX - self.rayon
         self.collisionY1 = posY - self.rayon
@@ -52,25 +52,25 @@ class Creep():
 
 
             if self.currentRoute == 1:
-                self.vitesseX = 5
+                self.vitesseX = 1
                 self.vitesseY = 0
             elif self.currentRoute == 2:
                 self.vitesseX = 0
-                self.vitesseY = -5
+                self.vitesseY = -1
             elif self.currentRoute == 3:
-                self.vitesseX = 5
+                self.vitesseX = 1
                 self.vitesseY = 0
             elif self.currentRoute == 4:
                 self.vitesseX = 0
-                self.vitesseY = 5
+                self.vitesseY = 1
             elif self.currentRoute == 5:
-                self.vitesseX = -5
+                self.vitesseX = -1
                 self.vitesseY = 0
             elif self.currentRoute == 6:
                 self.vitesseX = 0
-                self.vitesseY = 5
+                self.vitesseY = 1
             elif self.currentRoute == 7:
-                self.vitesseX = 5
+                self.vitesseX = 1
                 self.vitesseY = 0
 
         else:
