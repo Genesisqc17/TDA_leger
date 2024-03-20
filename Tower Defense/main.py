@@ -20,7 +20,6 @@ class Controleur():
     def boucle_jeu(self):
         self.vue.afficher_all()
         self.vue.update_text()
-       # self.vue.update_text()
         if not self.modele.isVague:
             self.modele.debut_vague()
         if self.modele.isVague:

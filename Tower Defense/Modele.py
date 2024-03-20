@@ -66,6 +66,10 @@ class Modele():
         self.timeTotal = self.timeFin - self.timeDebut
         elapsed_seconds = int (self.timeTotal)
 
+        if len(self.creepInactif) ==0:
+            if len(self.creepActif) == 0:
+                self.isVague = False
+
         if self.timeTotal >= self.intervalSpawnCreep and len(self.creepInactif) != 0:
             self.creepActif.append(self.creepInactif[-1])
             self.creepInactif = self.creepInactif[:-1]
@@ -115,6 +119,7 @@ class Modele():
         if len(self.creepActif) != 0:
             for i in self.creepActif:
                 i.CreepVie()
+
     def fin_vague(self):
         self.projActif.clear()
         self.argent = self.argent + self.niveauVague * 50
