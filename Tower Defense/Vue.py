@@ -285,7 +285,7 @@ class Vue():
                                              fill="gold", tags="proj")
             if i.parent.type == "tEclair":
                 if i.cibleX and i.cibleY is not None:
-                    self.canevasGame.create_line(j.posX, j.posY, j.cibleX, j.cibleY,
+                    self.canevasGame.create_line(i.parent.posX, i.parent.posY, i.cibleX, i.cibleY,
                                              fill="deep sky blue", tags="proj", width=5)
             if i.parent.type == "tPoison":
                 self.canevasGame.create_oval(i.posX - i.rayon, i.posY - i.rayon,

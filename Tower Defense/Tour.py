@@ -41,7 +41,7 @@ class Tour():
         if self.type == "tProjectile" and int(self.parent.timeTotal) % self.frequenceTirs == 0:
            self.parent.projActif.append(Projectile(self,self.posX,self.posY,self.cibleX,self.cibleY,self.niveauForce))
            print("tirer proj")
-        elif self.type == "tEclair" and self.parent.timeTotal % self.frequenceTirs == 0:
+        elif self.type == "tEclair" and int(self.parent.timeTotal) % self.frequenceTirs == 0:
            self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
            print("tirer eclair")
         elif self.type == "tPoison" and self.parent.timeTotal % self.frequenceTirs == 0:

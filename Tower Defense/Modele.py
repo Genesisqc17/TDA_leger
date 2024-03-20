@@ -116,8 +116,9 @@ class Modele():
         if len(self.projActif) != 0:
             collidedProjectiles = []
             for i in self.projActif:
-                if i.collided == True:
-                    collidedProjectiles.append(i)
+                if i.parent.type == "tProjectile":
+                    if i.collided == True:
+                        collidedProjectiles.append(i)
 
             for i in collidedProjectiles:
                 self.projActif.remove(i)
