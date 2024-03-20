@@ -12,12 +12,13 @@ class Eclair:
         self.rayon = 5
         self.etendu = parent.etendu
         self.cible = None
+        self.collided = False
         self.dommage_niveau()
         self.trouver_cible()
 
     def dommage_niveau(self):
         if self.niveauTour == 1:
-            self.dommage = 1
+            self.dommage = 0.02
 
         elif self.niveauTour == 2:
             self.dommage = 0.4
@@ -37,6 +38,8 @@ class Eclair:
             distance = hp.calcDistance(self.posX, self.posY, self.cible.posX, self.cible.posY)
             if distance <= self.etendu:
                 self.cible.vie -= self.dommage
+                if self.cible.vie <= 0:
+                    self.collided = True
 
     def trouver_cible(self):
         for creep in self.parent.parent.creepActif:

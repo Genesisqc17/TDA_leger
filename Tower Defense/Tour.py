@@ -43,8 +43,9 @@ class Tour():
                 self.nextShotTime = self.tick + 35
 
         elif self.type == "tEclair":
-            if int(self.parent.timeTotal) % self.nextShotTime == 0:
+            if self.tick >= self.nextShotTime:
                 self.parent.projActif.append(Eclair(self,self.posX,self.posY,self.niveauForce))
+
 
         self.tick += 1
         self.cibleX = None
