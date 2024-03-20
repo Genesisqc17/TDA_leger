@@ -221,7 +221,6 @@ class Vue():
         self.canevasGame.unbind("<Button-1>")
         self.canevasGame.bind("<Button-1>", self.checkOverlap)
 
-
     def ameliorer_tour_frame(self, event):
         x, y = event.x, event.y
         items = self.canevasGame.find_overlapping(x, y, x, y)
@@ -246,7 +245,7 @@ class Vue():
 
         return self.gameover_frame
 
-        def afficher_all(self):
+    def afficher_all(self):
         self.canevasGame.delete("all")
 
         for i in self.modele.routes:
@@ -289,11 +288,9 @@ class Vue():
                                                  i.posX + i.rayon, i.posY + i.rayon,
                                                  fill="gold", tags="proj")
 
-
     def find_overlapping(self,canvas, x1, y1, x2, y2):
         overlapping_items = canvas.find_overlapping(x1, y1, x2, y2)
         return overlapping_items
-
 
     def update_text(self):
         self.niv_wave_text.set("Vague: " + str(self.modele.niveauVague))
