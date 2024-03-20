@@ -63,19 +63,22 @@ class Tour():
 
 
 
-    def ameliorer(self, prix):
+    def ameliorer(self):
         if self.parent.argent > self.cout and self.niveauForce < 3:
 
             self.niveauForce = self.niveauForce + 1
 
             if self.type == "tProjectile":
                 self.cout = self.cout * 2
+                self.etendu += 25
 
             elif self.type == "tEclair":
                 self.cout = self.cout * 1.5
+                self.etendu += 20
 
             elif self.type == "tPoison":
                 self.cout = self.cout * 1.75
+                self.etendu += 10
 
     def idTourSelect(self):
         return self.id

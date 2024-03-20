@@ -207,7 +207,7 @@ class Vue():
 
     def ameliorer_tour(self):
         self.parent.ameliorer_tour(self.id_tour_selectionne)
-        self.update_tour_info()
+        self.update_tour_info(self.id_tour_selectionne)
 
     def creer_game_over(self):
         self.gameover_frame = Frame(self.root)
